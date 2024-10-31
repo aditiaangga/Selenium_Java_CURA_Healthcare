@@ -1,0 +1,11 @@
+testCases\loginSuccess.class
+testCases\tc5_FailedAppointment.class
+testCases\tc1_ClickMakeAppointment.class
+StepDef\loginCURA.class
+testCases\tc3_AppointmentSuccessAllField.class
+pages\Homepage.class
+pages\Appointment.class
+testCases\tc2_GoToMakeAppointment.class
+TestRunner\TestRunner.class
+testCases\tc4_AppointmentSuccessRequiredField.class
+pages\Login.class
