@@ -7,5 +7,5 @@ pipeline {
                 bat 'mvn clean test -Drunner.include=%runner% -Denvironmentprofile=%environtment%'
                 }
         }
-
+    }
 }
