@@ -31,7 +31,7 @@ public class Hooks {
         options.addArguments("--remote-debugging-port=0"); // Hindari konflik port
         options.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
         options.addArguments("--no-sandbox");            // Hindari sandbox (untuk debugging)
-//        options.addArguments("--headless=new");          // Jalankan di mode headless (opsional)
+        options.addArguments("--headless=new");          // Jalankan di mode headless (opsional)
 
         driver = new EdgeDriver(options);
         DriverManager.setDriver(driver);
