@@ -7,9 +7,6 @@ pipeline {
             steps {
             bat 'mvn clean test'
             echo "works"
-            sh 'google-chrome --version'
-            sh 'chromedriver --version'
-
             }
         }
     }
