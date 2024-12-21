@@ -8,6 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import utils.DriverManager;
 
 import javax.imageio.ImageIO;
@@ -17,17 +18,26 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class Hooks {
-
     WebDriver driver;
     private static Scenario currentScenario;
 
     @Before
     public void browserSetup(Scenario scenario){
-        WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
+//        WebDriverManager.edgedriver().setup();
+//        driver = new EdgeDriver();
+        System.setProperty("webdriver.edge.driver", "driver/msedgedriver.exe");
+
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("--remote-debugging-port=0"); // Hindari konflik port
+        options.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
+        options.addArguments("--no-sandbox");            // Hindari sandbox (untuk debugging)
+//        options.addArguments("--headless=new");          // Jalankan di mode headless (opsional)
+
+        driver = new EdgeDriver(options);
         DriverManager.setDriver(driver);
         currentScenario = scenario;
     }
+
 
     public static Scenario getCurrentScenario() {
         return currentScenario; // Mengambil Scenario dari variabel statis
