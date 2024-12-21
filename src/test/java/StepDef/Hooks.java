@@ -36,18 +36,18 @@ public class Hooks {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
                 ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
-                chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
-                chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
+//                chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
+//                chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
+//                chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
 //                chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
 
             case "edge":
                 System.setProperty("webdriver.edge.driver", "driver/msedgedriver.exe");
                 EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--remote-debugging-port=0");
-                edgeOptions.addArguments("--disable-dev-shm-usage");
-                edgeOptions.addArguments("--no-sandbox");
+//                edgeOptions.addArguments("--remote-debugging-port=0");
+//                edgeOptions.addArguments("--disable-dev-shm-usage");
+//                edgeOptions.addArguments("--no-sandbox");
 //                edgeOptions.addArguments("--headless=new");
                 return new EdgeDriver(edgeOptions);
 
