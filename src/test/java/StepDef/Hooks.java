@@ -39,7 +39,7 @@ public class Hooks {
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-                chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+//                chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
 
             case "edge":
@@ -48,7 +48,7 @@ public class Hooks {
                 edgeOptions.addArguments("--remote-debugging-port=0");
                 edgeOptions.addArguments("--disable-dev-shm-usage");
                 edgeOptions.addArguments("--no-sandbox");
-                edgeOptions.addArguments("--headless=new");
+//                edgeOptions.addArguments("--headless=new");
                 return new EdgeDriver(edgeOptions);
 
             default:
