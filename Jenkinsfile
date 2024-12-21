@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage("build") {
             steps {
-            bat 'mvn clean test -Drunner.include=%runner%'
+            bat 'mvn clean test'
             echo "works"
             }
         }
