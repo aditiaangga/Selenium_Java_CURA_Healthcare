@@ -1,12 +1,31 @@
 pipeline {
     agent {
-      label 'master'
+        label 'master'
     }
+
     stages {
-        stage("build") {
+        stage('Build') {
             steps {
-            bat 'mvn clean test'
-            echo "works"
+                bat 'mvn clean test -Drunner.include=%runner%'
+            }
+
+           post {
+           		always {
+           		   archiveArtifacts artifacts: 'target/cucumber-result/**', fingerprint: true
+                   cucumber (  buildStatus: 'UNSTABLE',
+                               reportTitle: 'Cucumber Report Before Rerun',
+                               fileIncludePattern: 'target/cucumber-result/json/*.json',
+                               mergeFeaturesWithRetest: true,
+                               skipEmptyJSONFiles: true
+                               )
+                   cucumber (  buildStatus: 'FAILURE',
+                               reportTitle: 'Cucumber Report',
+                               fileIncludePattern: 'target/cucumber-result/*/*.json',
+                               mergeFeaturesWithRetest: true,
+                               skipEmptyJSONFiles: true
+                               )
+
+				}
             }
         }
     }
