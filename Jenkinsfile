@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mvn clean test -Drunner.include=%runner%'
+                bat 'mvn clean test -Dtest=%runner%'
             }
 
            post {
