@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mvn clean test -Dtest=%runner%'
+                bat 'mvn clean test -Dtest=%runner% -Dbrowser=%browser%'
             }
 
            post {

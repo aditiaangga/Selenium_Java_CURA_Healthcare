@@ -25,7 +25,7 @@ public class Hooks {
 
     @Before
     public void browserSetup(Scenario scenario) {
-        String browser = "edge";
+        String browser = System.getProperty("browser", "edge"); // Default Browser
         driver = initializeDriver(browser); // Inisialisasi driver menggunakan method
         DriverManager.setDriver(driver);
         currentScenario = scenario;
