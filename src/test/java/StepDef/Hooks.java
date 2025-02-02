@@ -3,7 +3,6 @@ package StepDef;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -41,7 +40,7 @@ public class Hooks {
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-//                chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+//                chromeOptions2.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
 
             case "edge":
@@ -64,6 +63,16 @@ public class Hooks {
 //                firefoxOptions.addArguments("--no-sandbox");
 //                firefoxOptions.addArguments("--headless=new");
                 return new FirefoxDriver(firefoxOptions);
+
+            case "opera":
+                System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+                ChromeOptions chromeOptions2 = new ChromeOptions();
+                chromeOptions2.setBinary("C:/Users/aditi/AppData/Local/Programs/Opera/opera.exe");
+                chromeOptions2.addArguments("--remote-debugging-port=0"); // Hindari konflik port
+                chromeOptions2.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
+                chromeOptions2.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
+//                chromeOptions2.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+                return new ChromeDriver(chromeOptions2);
 
             default:
                 throw new IllegalArgumentException("Browser yang dipilih tidak didukung: " + browser);
