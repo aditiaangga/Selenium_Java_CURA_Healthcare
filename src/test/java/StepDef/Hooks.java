@@ -11,6 +11,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import utils.DriverManager;
 
 import javax.imageio.ImageIO;
@@ -51,6 +53,18 @@ public class Hooks {
 //                edgeOptions.addArguments("--headless=new");
                 return new EdgeDriver(edgeOptions);
 
+            case "firefox":
+                System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+//                firefoxOptions.setCapability("webSocketUrl", true);
+//                firefoxOptions.setCapability("moz:debuggerAddress", true);
+//                firefoxOptions.addArguments("--enable-crash-reporter");
+//                firefoxOptions.addArguments("--remote-debugging-port=0");
+//                firefoxOptions.addArguments("--disable-dev-shm-usage");
+//                firefoxOptions.addArguments("--no-sandbox");
+//                firefoxOptions.addArguments("--headless=new");
+                return new FirefoxDriver(firefoxOptions);
+
             default:
                 throw new IllegalArgumentException("Browser yang dipilih tidak didukung: " + browser);
         }
@@ -64,7 +78,7 @@ public class Hooks {
 
         @After(order = 1)
         public void tearDown () {
-            driver.close();
+//            driver.close();
             driver.quit();
         }
 
