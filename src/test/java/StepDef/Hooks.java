@@ -40,7 +40,7 @@ public class Hooks {
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-//                chromeOptions2.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+//                operaOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
 
             case "edge":
@@ -65,14 +65,14 @@ public class Hooks {
                 return new FirefoxDriver(firefoxOptions);
 
             case "opera":
-                System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-                ChromeOptions chromeOptions2 = new ChromeOptions();
-                chromeOptions2.setBinary("C:/Users/aditi/AppData/Local/Programs/Opera/opera.exe");
-                chromeOptions2.addArguments("--remote-debugging-port=0"); // Hindari konflik port
-                chromeOptions2.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
-                chromeOptions2.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-//                chromeOptions2.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
-                return new ChromeDriver(chromeOptions2);
+                System.setProperty("webdriver.chrome.driver", "driver/operadriver.exe");
+                ChromeOptions operaOptions = new ChromeOptions();
+                operaOptions.setBinary("C:/Users/aditi/AppData/Local/Programs/Opera/opera.exe");
+                operaOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
+                operaOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
+                operaOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
+//                operaOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+                return new ChromeDriver(operaOptions);
 
             default:
                 throw new IllegalArgumentException("Browser yang dipilih tidak didukung: " + browser);
