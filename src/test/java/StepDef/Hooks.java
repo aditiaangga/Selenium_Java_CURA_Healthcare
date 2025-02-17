@@ -35,7 +35,7 @@ public class Hooks {
     private WebDriver initializeDriver(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "driver/ubuntu-latest/chromedriver");
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
