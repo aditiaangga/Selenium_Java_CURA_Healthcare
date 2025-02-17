@@ -28,14 +28,12 @@ jobs:
           java-version: '21'
       - name: Check WebDriver versions
         run: |
-              echo "ChromeDriver:"
-              chromedriver --version
-              echo "GeckoDriver:"
-              geckodriver --version
-              echo "EdgeDriver:"
-              msedgedriver --version
-              echo "SafariDriver:"
-              safaridriver --version || echo "SafariDriver not available"
+              echo "Chrome:"
+              google-chrome --version
+              echo "Firefox:"
+              firefox --version
+              echo "Edge:"
+              microsoft-edge --version
 
       # - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
       #   run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
