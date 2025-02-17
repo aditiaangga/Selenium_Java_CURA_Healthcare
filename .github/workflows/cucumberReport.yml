@@ -34,6 +34,7 @@ jobs:
               firefox --version
               echo "Edge:"
               microsoft-edge --version
+              which chromedriver
 
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
