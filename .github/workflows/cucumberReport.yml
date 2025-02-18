@@ -43,7 +43,10 @@ jobs:
               echo "SafariDriver:"
               which safaridriver
               safaridriver --version 
-              safaridriver --enable
+
+              if ! safaridriver -p 0 > /dev/null 2>&1; then
+              sudo safaridriver --enable
+              fi
 
 
 
