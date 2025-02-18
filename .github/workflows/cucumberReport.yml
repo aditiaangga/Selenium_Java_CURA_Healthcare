@@ -29,17 +29,23 @@ jobs:
       - name: Check Browser versions
         run: |
               echo "Chrome:"
-              google-chrome --version
+              "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --version  
+
               echo "Firefox:"
-              firefox --version
+              "/Applications/Firefox.app/Contents/MacOS/firefox" --version  
+
               echo "Edge:"
-              microsoft-edge --version
-              which chromedriver
-              chromedriver --version
-              which geckodriver
-              geckodriver --version
-              which msedgedriver
-              msedgedriver --version
+              "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" --version  
+
+              echo "Chromedriver:"
+              which chromedriver && chromedriver --version  
+
+              echo "Geckodriver:"
+              which geckodriver && geckodriver --version  
+
+              echo "MSEdgeDriver:"
+              which msedgedriver && msedgedriver --version  
+
 
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
