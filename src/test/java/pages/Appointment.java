@@ -22,6 +22,7 @@ public class Appointment {
         WebElement confirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary")));
         confirmation.isDisplayed();
         System.out.println(confirmation.getText());
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 //        Assertions.assertEquals("Appointment Confirmation", confirmation.getText());
     }
 }
