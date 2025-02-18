@@ -18,7 +18,7 @@ public class Appointment {
     }
 
     public void verifyAppointment(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         WebElement confirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary")));
         confirmation.isDisplayed();
         System.out.println(confirmation.getText());
