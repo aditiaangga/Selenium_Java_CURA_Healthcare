@@ -27,6 +27,21 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: Check Browser versions
+        run: |
+              echo "Chrome:"
+              google-chrome --version
+              echo "Firefox:"
+              firefox --version
+              echo "Edge:"
+              microsoft-edge --version
+              which chromedriver
+              chromedriver --version
+              which geckodriver
+              geckodriver --version
+              which msedgedriver
+              msedgedriver --version    
+
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
 
