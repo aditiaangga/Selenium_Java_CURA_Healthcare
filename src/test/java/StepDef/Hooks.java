@@ -44,7 +44,7 @@ public class Hooks {
                 return new ChromeDriver(chromeOptions);
 
             case "edge":
-                System.setProperty("webdriver.edge.driver", "driver/ubuntu-latest/msedgedriver");
+                System.setProperty("webdriver.edge.driver", "/usr/bin/msedgedriver");
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-debugging-port=0");
                 edgeOptions.addArguments("--disable-dev-shm-usage");
@@ -61,7 +61,7 @@ public class Hooks {
 //                firefoxOptions.addArguments("--remote-debugging-port=0");
 //                firefoxOptions.addArguments("--disable-dev-shm-usage");
 //                firefoxOptions.addArguments("--no-sandbox");
-                firefoxOptions.addArguments("--headless=new");
+                firefoxOptions.addArguments("--headless");
                 return new FirefoxDriver(firefoxOptions);
 
             case "opera":
