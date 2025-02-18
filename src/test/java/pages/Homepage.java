@@ -5,8 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ScreenshotUtil;
+
+import java.time.Duration;
 
 public class Homepage {
     WebDriver driver;
@@ -24,7 +28,9 @@ public class Homepage {
     By buttonBookAppointment = By.id("btn-book-appointment");
 
     public void verifyHomepage(){
-        String homepage = driver.findElement(makeAppointment).getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement hp = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
+        String homepage = hp.getText();
         System.out.println(homepage);
         Assertions.assertEquals("Make Appointment", homepage);
         ss.takeScreenshotWithResizedHeight("homepage");
