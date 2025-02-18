@@ -30,13 +30,16 @@ jobs:
       - name: Check Browser versions
         run: |
               echo "Chromedriver:"
-              which chromedriver && chromedriver --version  
+              which chromedriver 
+              chromedriver --version  
 
               echo "Geckodriver:"
-              which geckodriver && geckodriver --version  
+              which geckodriver
+              geckodriver --version  
 
               echo "MSEdgeDriver:"
-              which msedgedriver && msedgedriver --version  
+              which msedgedriver
+              msedgedriver --version  
 
 
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
