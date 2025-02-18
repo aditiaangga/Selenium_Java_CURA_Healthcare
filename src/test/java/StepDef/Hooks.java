@@ -12,6 +12,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import utils.DriverManager;
 
 import javax.imageio.ImageIO;
@@ -35,13 +37,20 @@ public class Hooks {
     private WebDriver initializeDriver(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
                 chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
+
+            case "safari":
+                System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
+                SafariOptions safariOptions = new SafariOptions();
+                safariOptions.setAutomaticInspection(false); // Disable remote debugging
+                safariOptions.setAutomaticProfiling(false);  // Disable unnecessary profiling
+                return new SafariDriver(SafariOptions);    
 
             case "edge":
                 System.setProperty("webdriver.edge.driver", "/usr/bin/msedgedriver");
