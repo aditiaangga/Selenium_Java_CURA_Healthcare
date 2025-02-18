@@ -44,7 +44,7 @@ public class Hooks {
                 return new ChromeDriver(chromeOptions);
 
             case "edge":
-                System.setProperty("webdriver.edge.driver", "/usr/bin/msedgedriver");
+                System.setProperty("webdriver.edge.driver", "driver/ubuntu-latest/msedgedriver");
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-debugging-port=0");
                 edgeOptions.addArguments("--disable-dev-shm-usage");
