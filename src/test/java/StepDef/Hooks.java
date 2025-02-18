@@ -46,7 +46,7 @@ public class Hooks {
                 return new ChromeDriver(chromeOptions);
 
             case "safari":
-                // System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
+                System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
                 SafariOptions safariOptions = new SafariOptions();
                 // safariOptions.setAutomaticInspection(true);
                 // safariOptions.setAutomaticProfiling(true);
