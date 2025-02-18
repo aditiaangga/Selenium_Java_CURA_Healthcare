@@ -26,25 +26,26 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-      - name: Check Browser versions
-        run: |
-              echo "Chrome:"
-              "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --version  
+      
+      # - name: Check Browser versions
+      #   run: |
+      #         echo "Chrome:"
+      #         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --version  
 
-              echo "Firefox:"
-              "/Applications/Firefox.app/Contents/MacOS/firefox" --version  
+      #         echo "Firefox:"
+      #         "/Applications/Firefox.app/Contents/MacOS/firefox" --version  
 
-              echo "Edge:"
-              "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" --version  
+      #         echo "Edge:"
+      #         "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" --version  
 
-              echo "Chromedriver:"
-              which chromedriver && chromedriver --version  
+      #         echo "Chromedriver:"
+      #         which chromedriver && chromedriver --version  
 
-              echo "Geckodriver:"
-              which geckodriver && geckodriver --version  
+      #         echo "Geckodriver:"
+      #         which geckodriver && geckodriver --version  
 
-              echo "MSEdgeDriver:"
-              which msedgedriver && msedgedriver --version  
+      #         echo "MSEdgeDriver:"
+      #         which msedgedriver && msedgedriver --version  
 
 
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
