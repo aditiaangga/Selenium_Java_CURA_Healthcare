@@ -22,7 +22,7 @@ Feature: Check Appointment CURA
       | Tokyo     | Medicare    | 20/12/2023  | Thank You   |
       | Hongkong  | Medicaid    | 20/01/2024  | Danke       |
       | Seoul     | None        | 23/01/2024  | Terimakasih |
-      #| Hongkong  | Medicare    | 29/01/2024  | Matursuwun  |
+      | Hongkong  | Medicare    | 29/01/2024  | Matursuwun  |
 
   Scenario: User want to Appointment Success Required Field
     Given User Open website CURA Healthcare with browser
