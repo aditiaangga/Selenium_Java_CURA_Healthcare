@@ -35,8 +35,11 @@ jobs:
               echo "Edge:"
               microsoft-edge --version
               which chromedriver
+              chromedriver --version
               which geckodriver
+              geckodriver --version
               which msedgedriver
+              msedgedriver --version
 
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
