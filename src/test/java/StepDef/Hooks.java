@@ -43,6 +43,7 @@ public class Hooks {
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
                 chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+                chromeOptions.addArguments("--disable-gpu");
                 return new ChromeDriver(chromeOptions);
 
             case "safari":
