@@ -36,23 +36,23 @@ public class Homepage {
         ss.takeScreenshotWithResizedHeight("homepage");
     }
 
-    public void clickMakeAppointment() throws InterruptedException {
-        Thread.sleep(1000);
+    public void clickMakeAppointment() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         driver.findElement(buttonMakeAppointment).click();
     }
 
     public void goToMakeAppointment() throws InterruptedException {
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         js.executeScript("window.scrollBy(0,500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
     }
