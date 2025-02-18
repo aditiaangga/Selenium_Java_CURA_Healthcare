@@ -41,6 +41,10 @@ jobs:
               which msedgedriver
               msedgedriver --version  
 
+              echo "SafariDriver:"
+              which safaridriver
+              safaridriver --version 
+
 
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
