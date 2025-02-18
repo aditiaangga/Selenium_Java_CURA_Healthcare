@@ -42,14 +42,14 @@ public class Hooks {
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-                chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+                // chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
 
             case "safari":
                 System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
                 SafariOptions safariOptions = new SafariOptions();
-                safariOptions.setAutomaticInspection(false); // Disable remote debugging
-                safariOptions.setAutomaticProfiling(false);  // Disable unnecessary profiling
+                safariOptions.setAutomaticInspection(true);
+                safariOptions.setAutomaticProfiling(true);
                 return new SafariDriver(safariOptions);    
 
             case "edge":
