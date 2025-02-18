@@ -28,7 +28,7 @@ public class Homepage {
     By buttonBookAppointment = By.id("btn-book-appointment");
 
     public void verifyHomepage(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         WebElement hp = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         String homepage = hp.getText();
         System.out.println(homepage);
