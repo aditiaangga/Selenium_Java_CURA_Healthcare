@@ -44,9 +44,10 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-              if ! safaridriver -p 0 > /dev/null 2>&1; then
+              defaults write com.apple.Safari IncludeDevelopMenu YES
+              defaults write com.apple.Safari AllowRemoteAutomation 1
               sudo safaridriver --enable
-              fi
+              safaridriver -p 0 &
 
 
 
