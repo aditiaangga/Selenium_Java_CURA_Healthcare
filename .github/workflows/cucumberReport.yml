@@ -43,6 +43,8 @@ jobs:
               echo "SafariDriver:"
               which safaridriver
               safaridriver --version 
+              safaridriver --enable
+
 
 
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
