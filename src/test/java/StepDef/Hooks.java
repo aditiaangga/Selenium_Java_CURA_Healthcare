@@ -50,7 +50,7 @@ public class Hooks {
                 SafariOptions safariOptions = new SafariOptions();
                 safariOptions.setAutomaticInspection(false); // Disable remote debugging
                 safariOptions.setAutomaticProfiling(false);  // Disable unnecessary profiling
-                return new SafariDriver(SafariOptions);    
+                return new SafariDriver(safariOptions);    
 
             case "edge":
                 System.setProperty("webdriver.edge.driver", "/usr/bin/msedgedriver");
