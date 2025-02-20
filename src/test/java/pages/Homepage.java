@@ -42,7 +42,7 @@ public class Homepage {
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
-        wait1.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
+        WebElement btnMakeAppointment = wait1.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         btnMakeAppointment.click();
     }
