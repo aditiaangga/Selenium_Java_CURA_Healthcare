@@ -43,8 +43,10 @@ jobs:
               echo "SafariDriver:"
               which safaridriver
               safaridriver --version 
+
+              echo "runner ALL=(ALL) NOPASSWD: /usr/bin/safaridriver" | sudo tee /etc/sudoers.d/safaridriver
+              sudo safaridriver --enable
               
-              safaridriver --enable
 
 
 
