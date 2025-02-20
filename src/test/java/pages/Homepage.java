@@ -37,22 +37,24 @@ public class Homepage {
     }
 
     public void clickMakeAppointment() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WebElement btnMakeAppointment = wait1.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        driver.findElement(buttonMakeAppointment).click();
+        btnMakeAppointment.click();
     }
 
     public void goToMakeAppointment() throws InterruptedException {
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait2.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        wait2.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
         js.executeScript("window.scrollBy(0,500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
     }
