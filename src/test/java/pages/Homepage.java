@@ -89,7 +89,8 @@ public class Homepage {
     }
 
     public void submitBookAppointment(){
-        driver.findElement(buttonBookAppointment).click();
+        WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait3.until(ExpectedConditions.visibilityOfElementLocated(buttonBookAppointment)).click();
     }
 
     public void emptyValidation(){
