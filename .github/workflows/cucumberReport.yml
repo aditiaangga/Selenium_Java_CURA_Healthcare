@@ -46,6 +46,8 @@ jobs:
 
               echo "runner ALL=(ALL) NOPASSWD: /usr/bin/safaridriver" | sudo tee /etc/sudoers.d/safaridriver
               sudo safaridriver --enable
+              safaridriver -p 4444 > /dev/null 2>&1 &
+          sleep 5 
               
 
 
