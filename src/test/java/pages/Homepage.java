@@ -15,7 +15,6 @@ import java.time.Duration;
 public class Homepage {
     WebDriver driver;
     ScreenshotUtil ss = new ScreenshotUtil(driver);
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
 
     public Homepage(WebDriver driver){
@@ -29,6 +28,7 @@ public class Homepage {
     By buttonBookAppointment = By.id("btn-book-appointment");
 
     public void verifyHomepage(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         WebElement hp = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         String homepage = hp.getText();
         System.out.println(homepage);
@@ -37,22 +37,24 @@ public class Homepage {
     }
 
     public void clickMakeAppointment() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
+        WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         btnMakeAppointment.click();
     }
 
     public void goToMakeAppointment() throws InterruptedException {
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
+        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait2.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
+        wait2.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
         js.executeScript("window.scrollBy(0,500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
     }
