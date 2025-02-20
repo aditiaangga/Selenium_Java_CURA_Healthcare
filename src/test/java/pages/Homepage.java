@@ -104,7 +104,22 @@ public class Homepage {
     }
 
     public WebElement waitForElementVisible(By element, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        int retries = 0;
+        int maxRetries = 5;  // Maksimum 5 kali percobaan
+
+        while (retries < maxRetries) {
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+            } catch (Exception e) {
+                retries++;
+                System.out.println("Percobaan ke-" + retries + ": Elemen belum terlihat, mencoba kembali...");
+
+                if (retries == maxRetries) {
+                    throw new RuntimeException("Gagal menemukan elemen setelah " + maxRetries + " percobaan.", e);
+                }
+            }
+        }
+        return null;
     }
 }
