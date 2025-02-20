@@ -28,44 +28,40 @@ public class Homepage {
     By buttonBookAppointment = By.id("btn-book-appointment");
 
     public void verifyHomepage(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement hp = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
-        String homepage = hp.getText();
+        String homepage = waitForElementVisible(makeAppointment,15).getText();
         System.out.println(homepage);
         Assertions.assertEquals("Make Appointment", homepage);
         ss.takeScreenshotWithResizedHeight("homepage");
     }
 
     public void clickMakeAppointment() {
-        WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait1.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
+        waitForElementVisible(makeAppointment, 15);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
-        WebElement btnMakeAppointment = wait1.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
+        WebElement btnMakeAppointment = waitForElementVisible(buttonMakeAppointment,15);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         btnMakeAppointment.click();
     }
 
     public void goToMakeAppointment() throws InterruptedException {
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait2.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
+        waitForElementVisible(makeAppointment,15);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        wait2.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
+        waitForElementVisible(buttonMakeAppointment,15);
         js.executeScript("window.scrollBy(0,500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
     }
 
     public void facility(String city){
-        Select drpFacility = new Select(driver.findElement(By.id("combo_facility")));
+        Select drpFacility = new Select(waitForElementVisible(By.id("combo_facility"),15));
         drpFacility.selectByValue(city+" CURA Healthcare Center");
     }
 
     public void hospitalReadmission(){
-        WebElement checkbox = driver.findElement(hospitalReadmission);
+        WebElement checkbox = waitForElementVisible(hospitalReadmission,15);
         boolean isSelected = checkbox.isSelected();
         if(isSelected == false) {
             checkbox.click();
@@ -73,7 +69,7 @@ public class Homepage {
     }
 
     public void healthcareProgram(String hc){
-        WebElement radiobtn = driver.findElement(By.xpath("//input[@value='"+hc+"']"));
+        WebElement radiobtn = waitForElementVisible(By.xpath("//input[@value='"+hc+"']"),15);
         boolean Selected = radiobtn.isSelected();
         if(Selected == false) {
             radiobtn.click();
@@ -81,21 +77,20 @@ public class Homepage {
     }
 
     public void date(String date){
-        driver.findElement(visitDate).sendKeys(date);
+        waitForElementVisible(visitDate,15).sendKeys(date);
     }
 
     public void comment(String com){
-        driver.findElement(comment).sendKeys(com);
+        waitForElementVisible(comment,15).sendKeys(com);
     }
 
     public void submitBookAppointment(){
-        WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait3.until(ExpectedConditions.visibilityOfElementLocated(buttonBookAppointment)).click();
+        waitForElementVisible(buttonBookAppointment,15).click();
     }
 
     public void emptyValidation(){
-        WebElement visitDate = driver.findElement(By.name("visit_date"));
-        Boolean isRequiredVisitDate = Boolean.valueOf(driver.findElement(By.name("visit_date")).getAttribute("required"));
+        WebElement visitDate = waitForElementVisible(By.name("visit_date"),15);
+        Boolean isRequiredVisitDate = Boolean.valueOf(waitForElementVisible(By.name("visit_date"),15).getAttribute("required"));
         //visitDate.getAttribute("required");
         System.out.println(isRequiredVisitDate);
         visitDate.isDisplayed();
@@ -106,5 +101,10 @@ public class Homepage {
         String message = visitDate.getAttribute("validationMessage");
         System.out.println("message : " + message);
         ss.takeScreenshotWithResizedHeight("Empty Validation");
+    }
+
+    public WebElement waitForElementVisible(By element, int timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 }
