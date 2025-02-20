@@ -51,12 +51,12 @@ public class Homepage {
     public void goToMakeAppointment() throws InterruptedException {
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement ma = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
+        WebElement mkApp = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement btnMakeAppointment = wait.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
+        WebElement btnMkAppointment = wait.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
         js.executeScript("window.scrollBy(0,500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
     }
