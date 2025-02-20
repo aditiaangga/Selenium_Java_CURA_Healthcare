@@ -43,11 +43,8 @@ jobs:
               echo "SafariDriver:"
               which safaridriver
               safaridriver --version 
-
-              defaults write com.apple.Safari IncludeDevelopMenu YES
-              defaults write com.apple.Safari AllowRemoteAutomation 1
-              sudo safaridriver --enable
-              safaridriver -p 0 &
+              
+              safaridriver --enable
 
 
 
