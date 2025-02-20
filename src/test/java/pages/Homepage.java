@@ -15,6 +15,7 @@ import java.time.Duration;
 public class Homepage {
     WebDriver driver;
     ScreenshotUtil ss = new ScreenshotUtil(driver);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
 
     public Homepage(WebDriver driver){
@@ -28,7 +29,6 @@ public class Homepage {
     By buttonBookAppointment = By.id("btn-book-appointment");
 
     public void verifyHomepage(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         WebElement hp = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         String homepage = hp.getText();
         System.out.println(homepage);
@@ -37,26 +37,22 @@ public class Homepage {
     }
 
     public void clickMakeAppointment() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement ma = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement btnMakeAppointment = wait.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         btnMakeAppointment.click();
     }
 
     public void goToMakeAppointment() throws InterruptedException {
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement mkApp = wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(makeAppointment));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement btnMkAppointment = wait.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(buttonMakeAppointment));
         js.executeScript("window.scrollBy(0,500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
     }
