@@ -28,14 +28,16 @@ public class Homepage {
     By buttonBookAppointment = By.id("btn-book-appointment");
 
     public void verifyHomepage(){
-        String homepage = waitForElementVisible(makeAppointment,15).getText();
+        waitForPageLoad();
+        String homepage = waitForElementVisible(makeAppointment,10).getText();
         System.out.println(homepage);
         Assertions.assertEquals("Make Appointment", homepage);
         ss.takeScreenshotWithResizedHeight("homepage");
     }
 
     public void clickMakeAppointment() {
-        waitForElementVisible(makeAppointment, 15);
+        waitForPageLoad();
+        waitForElementVisible(makeAppointment, 10);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
@@ -45,23 +47,24 @@ public class Homepage {
     }
 
     public void goToMakeAppointment() throws InterruptedException {
+        waitForPageLoad();
+        waitForElementVisible(makeAppointment,10);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        waitForElementVisible(makeAppointment,15);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        waitForElementVisible(buttonMakeAppointment,15);
+        waitForElementVisible(buttonMakeAppointment,10);
         js.executeScript("window.scrollBy(0,500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
     }
 
     public void facility(String city){
-        Select drpFacility = new Select(waitForElementVisible(By.id("combo_facility"),15));
+        Select drpFacility = new Select(waitForElementVisible(By.id("combo_facility"),10));
         drpFacility.selectByValue(city+" CURA Healthcare Center");
     }
 
     public void hospitalReadmission(){
-        WebElement checkbox = waitForElementVisible(hospitalReadmission,15);
+        WebElement checkbox = waitForElementVisible(hospitalReadmission,10);
         boolean isSelected = checkbox.isSelected();
         if(isSelected == false) {
             checkbox.click();
@@ -77,20 +80,20 @@ public class Homepage {
     }
 
     public void date(String date){
-        waitForElementVisible(visitDate,15).sendKeys(date);
+        waitForElementVisible(visitDate,10).sendKeys(date);
     }
 
     public void comment(String com){
-        waitForElementVisible(comment,15).sendKeys(com);
+        waitForElementVisible(comment,10).sendKeys(com);
     }
 
     public void submitBookAppointment(){
-        waitForElementVisible(buttonBookAppointment,15).click();
+        waitForElementVisible(buttonBookAppointment,10).click();
     }
 
     public void emptyValidation(){
-        WebElement visitDate = waitForElementVisible(By.name("visit_date"),15);
-        Boolean isRequiredVisitDate = Boolean.valueOf(waitForElementVisible(By.name("visit_date"),15).getAttribute("required"));
+        WebElement visitDate = waitForElementVisible(By.name("visit_date"),10);
+        Boolean isRequiredVisitDate = Boolean.valueOf(waitForElementVisible(By.name("visit_date"),10).getAttribute("required"));
         //visitDate.getAttribute("required");
         System.out.println(isRequiredVisitDate);
         visitDate.isDisplayed();
@@ -121,5 +124,10 @@ public class Homepage {
             }
         }
         return null;
+    }
+
+    public void waitForPageLoad() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 }
