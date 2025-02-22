@@ -27,7 +27,8 @@ public class Homepage {
     By comment = By.id("txt_comment");
     By buttonBookAppointment = By.id("btn-book-appointment");
 
-    public void verifyHomepage(){
+    public void verifyHomepage() throws InterruptedException {
+        Thread.sleep(5000);
         waitForPageLoad();
         String homepage = waitForElementVisible(makeAppointment,10).getText();
         System.out.println(homepage);

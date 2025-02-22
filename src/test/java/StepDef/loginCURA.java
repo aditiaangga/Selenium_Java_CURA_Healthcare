@@ -36,7 +36,7 @@ public class loginCURA {
     }
 
     @Then("User verify Homepage")
-    public void userVerifyHomepage() throws IOException {
+    public void userVerifyHomepage() throws IOException, InterruptedException {
         home.verifyHomepage();
     }
 
@@ -51,7 +51,7 @@ public class loginCURA {
     }
 
     @And("User fill the Data {string}, {string}, {string}, {string} about Appointment")
-    public void userFillTheDataAboutAppointment(String city, String hc, String date, String com) throws IOException {
+    public void userFillTheDataAboutAppointment(String city, String hc, String date, String com) throws IOException, InterruptedException {
         home.verifyHomepage();
         home.facility(city);
         home.hospitalReadmission();
@@ -71,7 +71,7 @@ public class loginCURA {
     }
 
     @And("User fill the Date {string} about Appointment")
-    public void userFillTheDateAboutAppointment(String date) throws IOException {
+    public void userFillTheDateAboutAppointment(String date) throws IOException, InterruptedException {
         home.verifyHomepage();
         home.date(date);
         ss.takeScreenshotWithResizedHeight("Fill The Data");
