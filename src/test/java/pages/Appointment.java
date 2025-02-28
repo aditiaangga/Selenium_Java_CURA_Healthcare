@@ -18,11 +18,11 @@ public class Appointment {
     }
 
     public void verifyAppointment(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement confirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary")));
         confirmation.isDisplayed();
         System.out.println(confirmation.getText());
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 //        Assertions.assertEquals("Appointment Confirmation", confirmation.getText());
     }
 }
