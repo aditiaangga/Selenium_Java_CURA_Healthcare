@@ -80,7 +80,8 @@ public class Homepage {
         }
     }
 
-    public void date(String date){
+    public void date(String date) throws InterruptedException {
+        Thread.sleep(2000);
         waitForElementVisible(visitDate,10).sendKeys(date);
     }
 
