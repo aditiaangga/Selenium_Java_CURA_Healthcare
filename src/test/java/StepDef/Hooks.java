@@ -42,7 +42,7 @@ public class Hooks {
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-                chromeOptions.addArguments("--headless=chrome");           // Jalankan di mode headless (opsional)
+                //chromeOptions.addArguments("--headless=chrome");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
 
             case "safari":
