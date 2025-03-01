@@ -45,21 +45,19 @@ jobs:
               safaridriver --version 
 
       - name: Enable Safari Remote Automation
+        if: runner.os == 'macOS' && github.event.inputs.browser == 'safari'
         run: |
           sudo safaridriver --enable
           defaults write com.apple.Safari AllowRemoteAutomation -bool true
           sudo killall safaridriver || true 
 
       - name: Verify Safari Remote Automation
+        if: runner.os == 'macOS' && github.event.inputs.browser == 'safari'
         run: |
           defaults read com.apple.Safari AllowRemoteAutomation
 
-      # - name: Open Safari in Background
-      #   run: |
-      #     open -a Safari
-      #     sleep 3
-
       - name: Restart SafariDriver
+        if: runner.os == 'macOS' && github.event.inputs.browser == 'safari'
         run: |
           sudo pkill -f safaridriver || true
           sleep 2
@@ -68,6 +66,7 @@ jobs:
           cat safaridriver.log
 
       - name: Check SafariDriver Status
+        if: runner.os == 'macOS' && github.event.inputs.browser == 'safari'
         run: |
           ps aux | grep safaridriver || echo "SafariDriver is not running"
           curl -s http://localhost:4444/status || echo "SafariDriver is not responding"    
