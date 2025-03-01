@@ -54,11 +54,18 @@ jobs:
         run: |
           defaults read com.apple.Safari AllowRemoteAutomation
 
-      - name: Start SafariDriver
+      - name: Open Safari in Background
         run: |
-          safaridriver -p 0 > safaridriver.log 2>&1 &
+          open -a Safari
           sleep 3
-          cat safaridriver.log  
+
+      - name: Restart SafariDriver
+        run: |
+          sudo pkill -f safaridriver || true
+          sleep 2
+          sudo safaridriver -p 4444 > safaridriver.log 2>&1 &
+          sleep 3
+          cat safaridriver.log
 
       - name: Check SafariDriver Status
         run: |
