@@ -19,7 +19,6 @@ import java.util.Locale;
 public class Homepage {
     WebDriver driver;
     ScreenshotUtil ss = new ScreenshotUtil(driver);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
 
 
     public Homepage(WebDriver driver){
@@ -45,6 +44,7 @@ public class Homepage {
         waitForPageLoad();
         waitForElementVisible(makeAppointment, 10);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         WebElement btnMakeAppointment = waitForElementVisible(buttonMakeAppointment,15);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
@@ -55,6 +55,7 @@ public class Homepage {
         waitForPageLoad();
         waitForElementVisible(makeAppointment,10);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         waitForElementVisible(buttonMakeAppointment,10);
@@ -102,6 +103,7 @@ public class Homepage {
         // waitForElementClickable(By.xpath("//span[.='"+month+"']"),10).click();
         // waitForElementClickable(By.xpath("//td[.='"+day+"']"),10).click();
 
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10));
         js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10));
         js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10));
@@ -117,6 +119,7 @@ public class Homepage {
 
     public void submitBookAppointment(){
         // waitForElementVisible(buttonBookAppointment,10).click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", waitForElementVisible(buttonBookAppointment,10));
     }
 
