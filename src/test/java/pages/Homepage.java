@@ -95,18 +95,12 @@ public class Homepage {
         int year = targetDate.getYear();
         int day = targetDate.getDayOfMonth();
 
-        Thread.sleep(1000);
-        waitForElementVisible(By.xpath("//span[@class='glyphicon glyphicon-calendar']"),10).click();
-        Thread.sleep(1000);
-        waitForElementVisible(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
-        Thread.sleep(1000);
-        waitForElementVisible(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
-        Thread.sleep(1000);
-        waitForElementVisible(By.xpath("//span[.='"+year+"']"),10).click();
-        Thread.sleep(1000);
-        waitForElementVisible(By.xpath("//span[.='"+month+"']"),10).click();
-        Thread.sleep(1000);
-        waitForElementVisible(By.xpath("//td[.='"+day+"']"),10).click();
+        waitForElementClickable(By.xpath("//span[@class='glyphicon glyphicon-calendar']"),10).click();
+        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
+        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
+        waitForElementClickable(By.xpath("//span[.='"+year+"']"),10).click();
+        waitForElementClickable(By.xpath("//span[.='"+month+"']"),10).click();
+        waitForElementClickable(By.xpath("//td[.='"+day+"']"),10).click();
     }
 
     public void comment(String com){
@@ -140,6 +134,26 @@ public class Homepage {
             try {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
                 return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+            } catch (Exception e) {
+                retries++;
+                System.out.println("Percobaan ke-" + retries + ": Elemen belum terlihat, mencoba kembali...");
+
+                if (retries == maxRetries) {
+                    throw new RuntimeException("Gagal menemukan elemen setelah " + maxRetries + " percobaan.", e);
+                }
+            }
+        }
+        return null;
+    }
+
+    public WebElement waitForElementClickable(By element, int timeoutInSeconds) {
+        int retries = 0;
+        int maxRetries = 5;  // Maksimum 5 kali percobaan
+
+        while (retries < maxRetries) {
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+                return wait.until(ExpectedConditions.elementToBeClickable(element));
             } catch (Exception e) {
                 retries++;
                 System.out.println("Percobaan ke-" + retries + ": Elemen belum terlihat, mencoba kembali...");
