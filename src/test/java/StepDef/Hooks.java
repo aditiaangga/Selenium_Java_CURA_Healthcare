@@ -32,14 +32,23 @@ public class Hooks {
         driver = initializeDriver(browser); // Inisialisasi driver menggunakan method
         DriverManager.setDriver(driver);
         currentScenario = scenario;
-        logBrowserInfo();
+        logSystemInfo();
     }
 
-    private void logBrowserInfo() {
+    private void logSystemInfo() {
+        // Dapatkan OS
+        String osName = System.getProperty("os.name");
+        String osVersion = System.getProperty("os.version");
+        String osArch = System.getProperty("os.arch");
+
+        // Dapatkan Browser
         Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
         String browserName = caps.getBrowserName();
         String browserVersion = caps.getBrowserVersion();
-        System.out.println("Saat ini menggunakan browser: " + browserName + " (versi: " + browserVersion + ")");
+
+        // Cetak Informasi
+        System.out.println("🚀 Saat ini menggunakan browser: " + browserName + " (versi: " + browserVersion + ")");
+        System.out.println("🖥️ Berjalan di OS: " + osName + " " + osVersion + " (" + osArch + ")");
     }
 
     private WebDriver initializeDriver(String browser) {
