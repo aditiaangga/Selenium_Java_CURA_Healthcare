@@ -85,15 +85,16 @@ public class Homepage {
     }
 
     public void date(String date) throws InterruptedException {
-        waitForElementVisible(visitDate,10).sendKeys(date);
-        // // Set tanggal tertentu dalam format dd/MM/yyyy
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        // LocalDate targetDate = LocalDate.parse(date, formatter);
+        // waitForElementVisible(visitDate,10).sendKeys(date);
+        
+        // Set tanggal tertentu dalam format dd/MM/yyyy
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate targetDate = LocalDate.parse(date, formatter);
 
-        // // Ambil 3 huruf pertama dari nama bulan (contoh: "Feb" untuk February)
-        // String month = targetDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH).substring(0, 3);
-        // int year = targetDate.getYear();
-        // int day = targetDate.getDayOfMonth();
+        // Ambil 3 huruf pertama dari nama bulan (contoh: "Feb" untuk February)
+        String month = targetDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH).substring(0, 3);
+        int year = targetDate.getYear();
+        int day = targetDate.getDayOfMonth();
 
         // waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10).click();
         // waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
@@ -101,6 +102,15 @@ public class Homepage {
         // waitForElementClickable(By.xpath("//span[.='"+year+"']"),10).click();
         // waitForElementClickable(By.xpath("//span[.='"+month+"']"),10).click();
         // waitForElementClickable(By.xpath("//td[.='"+day+"']"),10).click();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10));
+        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10));
+        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10));
+        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//span[.='"+year+"']"),10));
+        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//span[.='"+month+"']"),10));
+        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//td[.='"+day+"']"),10));
+
     }
 
     public void comment(String com){
