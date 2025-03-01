@@ -46,12 +46,15 @@ public class Hooks {
                 return new ChromeDriver(chromeOptions);
 
             case "safari":
-                System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
                 SafariOptions safariOptions = new SafariOptions();
                 safariOptions.setUseTechnologyPreview(true);
-                // safariOptions.setAutomaticInspection(true);
-                // safariOptions.setAutomaticProfiling(true);
-                return new SafariDriver(safariOptions);    
+    
+                try {
+                    URL safariDriverURL = new URL("http://localhost:4444");
+                    return new RemoteWebDriver(safariDriverURL, safariOptions);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException("Invalid SafariDriver URL", e);
+                }       
 
             case "edge":
                 System.setProperty("webdriver.edge.driver", "/usr/bin/msedgedriver");
