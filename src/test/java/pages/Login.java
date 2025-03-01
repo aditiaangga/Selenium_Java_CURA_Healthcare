@@ -20,8 +20,8 @@ public class Login {
 
     //Method to click menu Login
     public void clickMenuLogin() {
-        sh.clickWithJS(menu),10);
-        sh.clickWithJS(menuLogin),10);
+        sh.clickWithJS(menu,10);
+        sh.clickWithJS(menuLogin,10);
         // driver.findElement(menu).click();
         // driver.findElement(menuLogin).click();
     }
@@ -38,7 +38,7 @@ public class Login {
 
     //Method to click on Login button
     public void clickLogin() {
-        sh.clickWithJS(buttonLogin),10);
+        sh.clickWithJS(buttonLogin,10);
         // driver.findElement(buttonLogin).click();
     }
 }
