@@ -14,7 +14,7 @@ on:
 
 jobs:
   test:
-    runs-on: macos-13
+    runs-on: macos-latest
 
     steps:
       - name: Checkout Repository
@@ -44,10 +44,10 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - name: Enable Safari Remote Automation
+      - name: Check SafariDriver Status
         run: |
-          sudo safaridriver --enable
-          defaults write com.apple.Safari AllowRemoteAutomation -bool true
+          ps aux | grep safaridriver
+          curl -s http://localhost:4444/status || echo "SafariDriver is not running"
 
               
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
