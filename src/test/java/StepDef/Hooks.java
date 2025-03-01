@@ -3,6 +3,7 @@ package StepDef;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.DriverManager;
 
 import javax.imageio.ImageIO;
@@ -30,6 +32,23 @@ public class Hooks {
         driver = initializeDriver(browser); // Inisialisasi driver menggunakan method
         DriverManager.setDriver(driver);
         currentScenario = scenario;
+        logSystemInfo();
+    }
+
+    private void logSystemInfo() {
+        // Dapatkan OS
+        String osName = System.getProperty("os.name");
+        String osVersion = System.getProperty("os.version");
+        String osArch = System.getProperty("os.arch");
+
+        // Dapatkan Browser
+        Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
+        String browserName = caps.getBrowserName();
+        String browserVersion = caps.getBrowserVersion();
+
+        // Cetak Informasi
+        System.out.println("🚀 Saat ini menggunakan browser: " + browserName + " (versi: " + browserVersion + ")");
+        System.out.println("🖥️ Berjalan di OS: " + osName + " " + osVersion + " (" + osArch + ")");
     }
 
     private WebDriver initializeDriver(String browser) {
