@@ -28,12 +28,14 @@ public class Login {
 
     //Method to enter username
     public void enterUsername(String user) {
-        driver.findElement(username).sendKeys(user);
+        sh.waitForElementClickable(username,10).sendKeys(user);
+        // driver.findElement(username).sendKeys(user);
     }
 
     //Method to enter password
     public void enterPassword(String pass) {
-        driver.findElement(password).sendKeys(pass);
+        sh.waitForElementClickable(password,10).sendKeys(pass);
+        // driver.findElement(password).sendKeys(pass);
     }
 
     //Method to click on Login button
