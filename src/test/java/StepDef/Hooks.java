@@ -38,7 +38,7 @@ public class Hooks {
         Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
         String browserName = caps.getBrowserName();
         String browserVersion = caps.getBrowserVersion();
-        System.out.println("🚀 Saat ini menggunakan browser: " + browserName + " (versi: " + browserVersion + ")");
+        System.out.println("Saat ini menggunakan browser: " + browserName + " (versi: " + browserVersion + ")");
     }
 
     private WebDriver initializeDriver(String browser) {
