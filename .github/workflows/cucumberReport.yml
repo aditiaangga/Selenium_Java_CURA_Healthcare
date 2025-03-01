@@ -46,8 +46,10 @@ jobs:
 
       - name: Enable Safari Remote Automation
         run: |
-          sudo safaridriver --enable
-          defaults write com.apple.Safari AllowRemoteAutomation -bool true
+              defaults write com.apple.Safari IncludeDevelopMenu YES
+              defaults write com.apple.Safari AllowRemoteAutomation 1
+              sudo safaridriver --enable
+              safaridriver -p 0 &
 
               
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
