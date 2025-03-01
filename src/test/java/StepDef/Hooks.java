@@ -14,6 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.DriverManager;
 
 import javax.imageio.ImageIO;
@@ -21,6 +22,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 public class Hooks {
     WebDriver driver;
