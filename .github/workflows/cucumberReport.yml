@@ -44,22 +44,22 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - name: Cek Safari WebDriver
-        run: |
-              if [ -f "/usr/bin/safaridriver" ]; then
-                echo "✅ safaridriver ditemukan!"
-                /usr/bin/safaridriver --version
-              else
-                echo "❌ safaridriver tidak ditemukan!"
-                exit 1
-              fi
+      # - name: Cek Safari WebDriver
+      #   run: |
+      #         if [ -f "/usr/bin/safaridriver" ]; then
+      #           echo "✅ safaridriver ditemukan!"
+      #           /usr/bin/safaridriver --version
+      #         else
+      #           echo "❌ safaridriver tidak ditemukan!"
+      #           exit 1
+      #         fi
 
-      - name: Enable Safari Remote Automation
-        run: sudo safaridriver --enable || echo "⚠️ Gagal mengaktifkan safaridriver"
+      # - name: Enable Safari Remote Automation
+      #   run: sudo safaridriver --enable || echo "⚠️ Gagal mengaktifkan safaridriver"
 
-      - name: Jalankan Safari Headless (Eksperimental)
-        run: |
-              /usr/bin/safaridriver > /dev/null 2>&1 &        
+      # - name: Jalankan Safari Headless (Eksperimental)
+      #   run: |
+      #         /usr/bin/safaridriver > /dev/null 2>&1 &        
               
 
 
