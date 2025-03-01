@@ -44,10 +44,11 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - name: Check SafariDriver Status
+      - name: Start SafariDriver with Logging
         run: |
-          ps aux | grep safaridriver
-          curl -s http://localhost:4444/status || echo "SafariDriver is not running"
+          safaridriver -p 4444 > safaridriver.log 2>&1 &
+          sleep 3
+          cat safaridriver.log
 
               
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
