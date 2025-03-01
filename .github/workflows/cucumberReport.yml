@@ -44,12 +44,6 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - run: |
-              defaults write com.apple.Safari IncludeDevelopMenu YES
-              defaults write com.apple.Safari AllowRemoteAutomation 1
-              sudo safaridriver --enable
-              safaridriver -p 0 &
-
               
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
