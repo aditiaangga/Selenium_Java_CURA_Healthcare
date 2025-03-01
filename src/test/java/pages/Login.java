@@ -2,9 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utils.SeleniumHelper;
 
 public class Login {
     WebDriver driver;
+    SeleniumHelper sh = new SeleniumHelper(driver);
 
     public Login(WebDriver driver){
         this.driver = driver;
@@ -18,8 +20,10 @@ public class Login {
 
     //Method to click menu Login
     public void clickMenuLogin() {
-        driver.findElement(menu).click();
-        driver.findElement(menuLogin).click();
+        sh.clickWithJS(menu),10);
+        sh.clickWithJS(menuLogin),10);
+        // driver.findElement(menu).click();
+        // driver.findElement(menuLogin).click();
     }
 
     //Method to enter username
@@ -34,6 +38,7 @@ public class Login {
 
     //Method to click on Login button
     public void clickLogin() {
-        driver.findElement(buttonLogin).click();
+        sh.clickWithJS(buttonLogin),10);
+        // driver.findElement(buttonLogin).click();
     }
 }
