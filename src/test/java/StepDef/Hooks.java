@@ -12,6 +12,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import utils.DriverManager;
 
 import javax.imageio.ImageIO;
@@ -35,25 +37,33 @@ public class Hooks {
     private WebDriver initializeDriver(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-//                operaOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+                chromeOptions.addArguments("--headless=chrome");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
 
+            case "safari":
+                System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
+                SafariOptions safariOptions = new SafariOptions();
+                safariOptions.setUseTechnologyPreview(true);
+                // safariOptions.setAutomaticInspection(true);
+                // safariOptions.setAutomaticProfiling(true);
+                return new SafariDriver(safariOptions);    
+
             case "edge":
-                System.setProperty("webdriver.edge.driver", "driver/msedgedriver.exe");
+                System.setProperty("webdriver.edge.driver", "/usr/bin/msedgedriver");
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-debugging-port=0");
                 edgeOptions.addArguments("--disable-dev-shm-usage");
                 edgeOptions.addArguments("--no-sandbox");
-//                edgeOptions.addArguments("--headless=new");
+                edgeOptions.addArguments("--headless=new");
                 return new EdgeDriver(edgeOptions);
 
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
 //                firefoxOptions.setCapability("webSocketUrl", true);
 //                firefoxOptions.setCapability("moz:debuggerAddress", true);
@@ -61,7 +71,7 @@ public class Hooks {
 //                firefoxOptions.addArguments("--remote-debugging-port=0");
 //                firefoxOptions.addArguments("--disable-dev-shm-usage");
 //                firefoxOptions.addArguments("--no-sandbox");
-//                firefoxOptions.addArguments("--headless=new");
+                firefoxOptions.addArguments("--headless");
                 return new FirefoxDriver(firefoxOptions);
 
             case "opera":
