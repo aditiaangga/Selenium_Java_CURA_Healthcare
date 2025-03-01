@@ -12,8 +12,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import utils.DriverManager;
 
 import javax.imageio.ImageIO;
@@ -37,33 +35,25 @@ public class Hooks {
     private WebDriver initializeDriver(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-                chromeOptions.addArguments("--headless=chrome");           // Jalankan di mode headless (opsional)
+//                operaOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
 
-            case "safari":
-                System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
-                SafariOptions safariOptions = new SafariOptions();
-                safariOptions.setUseTechnologyPreview(true);
-                // safariOptions.setAutomaticInspection(true);
-                // safariOptions.setAutomaticProfiling(true);
-                return new SafariDriver(safariOptions);    
-
             case "edge":
-                System.setProperty("webdriver.edge.driver", "/usr/bin/msedgedriver");
+                System.setProperty("webdriver.edge.driver", "driver/msedgedriver.exe");
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-debugging-port=0");
                 edgeOptions.addArguments("--disable-dev-shm-usage");
                 edgeOptions.addArguments("--no-sandbox");
-                edgeOptions.addArguments("--headless=new");
+//                edgeOptions.addArguments("--headless=new");
                 return new EdgeDriver(edgeOptions);
 
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+                System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
 //                firefoxOptions.setCapability("webSocketUrl", true);
 //                firefoxOptions.setCapability("moz:debuggerAddress", true);
@@ -71,7 +61,7 @@ public class Hooks {
 //                firefoxOptions.addArguments("--remote-debugging-port=0");
 //                firefoxOptions.addArguments("--disable-dev-shm-usage");
 //                firefoxOptions.addArguments("--no-sandbox");
-                firefoxOptions.addArguments("--headless");
+//                firefoxOptions.addArguments("--headless=new");
                 return new FirefoxDriver(firefoxOptions);
 
             case "opera":
@@ -90,59 +80,59 @@ public class Hooks {
     }
 
 
-        public static Scenario getCurrentScenario () {
-            return currentScenario; // Mengambil Scenario dari variabel statis
-        }
+    public static Scenario getCurrentScenario () {
+        return currentScenario; // Mengambil Scenario dari variabel statis
+    }
 
 
-        @After(order = 1)
-        public void tearDown () {
+    @After(order = 1)
+    public void tearDown () {
 //            driver.close();
-            driver.quit();
-        }
+        driver.quit();
+    }
 
-        @After
-        public void takeScreenshotFinal (Scenario scenario){
-            try {
-                WebDriver driver = DriverManager.getDriver();
-                if (driver != null) {
-                    File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    @After
+    public void takeScreenshotFinal (Scenario scenario){
+        try {
+            WebDriver driver = DriverManager.getDriver();
+            if (driver != null) {
+                File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-                    // Baca screenshot sebagai BufferedImage
-                    BufferedImage originalImage = ImageIO.read(screenshotFile);
+                // Baca screenshot sebagai BufferedImage
+                BufferedImage originalImage = ImageIO.read(screenshotFile);
 
-                    // Ambil ukuran asli gambar
-                    int originalWidth = originalImage.getWidth();
-                    int originalHeight = originalImage.getHeight();
+                // Ambil ukuran asli gambar
+                int originalWidth = originalImage.getWidth();
+                int originalHeight = originalImage.getHeight();
 
-                    // Hitung lebar baru berdasarkan rasio aspek
-                    int newHeight = 700;
-                    int newWidth = (int) ((double) originalWidth / originalHeight * newHeight);
+                // Hitung lebar baru berdasarkan rasio aspek
+                int newHeight = 700;
+                int newWidth = (int) ((double) originalWidth / originalHeight * newHeight);
 
-                    // Buat image dengan ukuran yang diinginkan
-                    BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
-                    Graphics2D g2d = resizedImage.createGraphics();
-                    g2d.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
-                    g2d.dispose();
+                // Buat image dengan ukuran yang diinginkan
+                BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
+                Graphics2D g2d = resizedImage.createGraphics();
+                g2d.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
+                g2d.dispose();
 
-                    // Konversi resized image ke byte array
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ImageIO.write(resizedImage, "png", baos);
-                    byte[] resizedScreenshot = baos.toByteArray();
+                // Konversi resized image ke byte array
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(resizedImage, "png", baos);
+                byte[] resizedScreenshot = baos.toByteArray();
 
-                    // Lampirkan screenshot yang sudah diubah ukurannya ke skenario
+                // Lampirkan screenshot yang sudah diubah ukurannya ke skenario
 //                scenario.attach(resizedScreenshot, "image/png", "Hooks");
-                    if (scenario.isFailed()) {
-                        scenario.attach(resizedScreenshot, "image/png", "Failed Screenshot");
-                        System.out.println("Screenshot taken for failed scenario: " + scenario.getName());
-                    } else {
-                        // Opsional: ambil screenshot jika skenario berhasil
-                        scenario.attach(resizedScreenshot, "image/png", "Passed Screenshot");
-                        System.out.println("Screenshot taken for passed scenario: " + scenario.getName());
-                    }
+                if (scenario.isFailed()) {
+                    scenario.attach(resizedScreenshot, "image/png", "Failed Screenshot");
+                    System.out.println("Screenshot taken for failed scenario: " + scenario.getName());
+                } else {
+                    // Opsional: ambil screenshot jika skenario berhasil
+                    scenario.attach(resizedScreenshot, "image/png", "Passed Screenshot");
+                    System.out.println("Screenshot taken for passed scenario: " + scenario.getName());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+}
