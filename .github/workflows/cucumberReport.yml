@@ -46,8 +46,9 @@ jobs:
 
       - name: Enable SafariDriver
         run: |
-          echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/safaridriver" | sudo tee -a /etc/sudoers
-          defaults write com.apple.Safari AllowRemoteAutomation -bool true
+          launchctl setenv SAFARIDRIVER_REMOTE_AUTOMATION 1
+          safaridriver --enable
+          # defaults write com.apple.Safari AllowRemoteAutomation -bool true
           sudo safaridriver --enable
 
       - name: Check Safari Remote Automation
