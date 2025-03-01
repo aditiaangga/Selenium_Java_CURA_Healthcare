@@ -44,11 +44,11 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - name: Start SafariDriver with launchctl
+      - name: Enable Safari Remote Automation
         run: |
-          sudo launchctl setenv SAFARIDRIVER_REMOTE_AUTOMATION 1
-          safaridriver -p 4444 &
-          sleep 3
+          sudo safaridriver --enable
+          defaults write com.apple.Safari AllowRemoteAutomation -bool true
+
               
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
