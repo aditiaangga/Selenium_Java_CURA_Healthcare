@@ -46,7 +46,7 @@ jobs:
 
       - name: Enable SafariDriver
         run: |
-          safaridriver --enable
+          # safaridriver --enable
           defaults write com.apple.Safari AllowRemoteAutomation -bool true
           sudo safaridriver --enable
 
