@@ -95,7 +95,7 @@ public class Homepage {
         int year = targetDate.getYear();
         int day = targetDate.getDayOfMonth();
 
-        driver.findElement(visitDate).click();
+        waitForElementVisible(visitDate,10).click();
         waitForElementVisible(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
         waitForElementVisible(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
         waitForElementVisible(By.xpath("//span[.='"+year+"']"),10).click();
