@@ -11,6 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ScreenshotUtil;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Homepage {
     WebDriver driver;
@@ -81,8 +85,22 @@ public class Homepage {
     }
 
     public void date(String date) throws InterruptedException {
-        Thread.sleep(2000);
-        waitForElementVisible(visitDate,10).sendKeys(date);
+//        waitForElementVisible(visitDate,10).sendKeys(date);
+        // Set tanggal tertentu dalam format dd/MM/yyyy
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate targetDate = LocalDate.parse(date, formatter);
+
+        // Ambil 3 huruf pertama dari nama bulan (contoh: "Feb" untuk February)
+        String month = targetDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH).substring(0, 3);
+        int year = targetDate.getYear();
+        int day = targetDate.getDayOfMonth();
+
+        driver.findElement(visitDate).click();
+        waitForElementVisible(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
+        waitForElementVisible(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
+        waitForElementVisible(By.xpath("//span[.='"+year+"']"),10).click();
+        waitForElementVisible(By.xpath("//span[.='"+month+"']"),10).click();
+        waitForElementVisible(By.xpath("//td[.='"+day+"']"),10).click();
     }
 
     public void comment(String com){
