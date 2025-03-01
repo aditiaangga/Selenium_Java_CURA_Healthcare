@@ -44,20 +44,20 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - name: Enable Safari Remote Automation
-        run: |
-          sudo safaridriver --enable
-          defaults write com.apple.Safari AllowRemoteAutomation -bool true
-          sudo killall safaridriver || true 
+      # - name: Enable Safari Remote Automation
+      #   run: |
+      #     sudo safaridriver --enable
+      #     defaults write com.apple.Safari AllowRemoteAutomation -bool true
+      #     sudo killall safaridriver || true 
 
       - name: Verify Safari Remote Automation
         run: |
           defaults read com.apple.Safari AllowRemoteAutomation
 
-      - name: Open Safari in Background
-        run: |
-          open -a Safari
-          sleep 3
+      # - name: Open Safari in Background
+      #   run: |
+      #     open -a Safari
+      #     sleep 3
 
       - name: Restart SafariDriver
         run: |
