@@ -44,9 +44,9 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - name: Start SafariDriver Without Port
+      - name: Start SafariDriver
         run: |
-          safaridriver > safaridriver.log 2>&1 &
+          safaridriver -p 0 > safaridriver.log 2>&1 &
           sleep 3
           cat safaridriver.log
 
