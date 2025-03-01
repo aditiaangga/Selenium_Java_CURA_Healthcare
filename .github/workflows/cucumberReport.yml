@@ -44,11 +44,10 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - name: Start SafariDriver with Sudo
+      - name: Enable Safari Remote Automation
         run: |
-          sudo safaridriver -p 0 > safaridriver.log 2>&1 &
-          sleep 3
-          cat safaridriver.log
+          sudo safaridriver --enable
+          defaults write com.apple.Safari AllowRemoteAutomation -bool true
 
               
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
