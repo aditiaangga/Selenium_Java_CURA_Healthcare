@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ScreenshotUtil;
+import utils.SeleniumHelper;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.Locale;
 public class Homepage {
     WebDriver driver;
     ScreenshotUtil ss = new ScreenshotUtil(driver);
+    SeleniumHelper sh = new SeleniumHelper(driver);
 
 
     public Homepage(WebDriver driver){
@@ -103,13 +105,12 @@ public class Homepage {
         // waitForElementClickable(By.xpath("//span[.='"+month+"']"),10).click();
         // waitForElementClickable(By.xpath("//td[.='"+day+"']"),10).click();
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10));
-        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10));
-        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10));
-        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//span[.='"+year+"']"),10));
-        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//span[.='"+month+"']"),10));
-        js.executeScript("arguments[0].click();", waitForElementClickable(By.xpath("//td[.='"+day+"']"),10));
+        sh.clickWithJS(By.xpath("//label[@for='txt_visit_date']"),10);
+        sh.clickWithJS(By.xpath("(//th[@class='datepicker-switch'])[1]"),10);
+        sh.clickWithJS(By.xpath("(//th[@class='datepicker-switch'])[2]"),10);
+        sh.clickWithJS(By.xpath("//span[.='"+year+"']"),10);
+        sh.clickWithJS(By.xpath("//span[.='"+month+"']"),10);
+        sh.clickWithJS(By.xpath("//td[.='"+day+"']"),10);
 
     }
 
@@ -119,8 +120,7 @@ public class Homepage {
 
     public void submitBookAppointment(){
         // waitForElementVisible(buttonBookAppointment,10).click();
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", waitForElementVisible(buttonBookAppointment,10));
+        sh.clickWithJS(buttonBookAppointment,10);
     }
 
     public void emptyValidation(){
