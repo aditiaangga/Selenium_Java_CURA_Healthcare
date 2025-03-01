@@ -19,10 +19,10 @@ Feature: Check Appointment CURA
     Then User verify Appointment
     Examples:
       | City      | Healthcare  | Date        | Comment     |
-      | Tokyo     | Medicare    | 20/12/2023  | Thank You   |
-      | Hongkong  | Medicaid    | 20/01/2024  | Danke       |
-      | Seoul     | None        | 23/01/2024  | Terimakasih |
-      | Hongkong  | Medicare    | 29/01/2024  | Matursuwun  |
+      | Tokyo     | Medicare    | 20/12/2025  | Thank You   |
+      | Hongkong  | Medicaid    | 20/03/2025  | Danke       |
+      | Seoul     | None        | 23/03/2025  | Terimakasih |
+      | Hongkong  | Medicare    | 29/03/2025  | Matursuwun  |
 
   Scenario: User want to Appointment Success Required Field
     Given User Open website CURA Healthcare with browser
