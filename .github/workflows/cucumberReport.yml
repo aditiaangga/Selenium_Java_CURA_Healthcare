@@ -44,26 +44,19 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      # - name: Cek Safari WebDriver
-      #   run: |
-      #         if [ -f "/usr/bin/safaridriver" ]; then
-      #           echo "✅ safaridriver ditemukan!"
-      #           /usr/bin/safaridriver --version
-      #         else
-      #           echo "❌ safaridriver tidak ditemukan!"
-      #           exit 1
-      #         fi
+      - name: Enable SafariDriver
+        run: |
+          safaridriver --enable
+          defaults write com.apple.Safari AllowRemoteAutomation -bool true
+          sudo safaridriver --enable
 
-      # - name: Enable Safari Remote Automation
-      #   run: sudo safaridriver --enable || echo "⚠️ Gagal mengaktifkan safaridriver"
-
-      # - name: Jalankan Safari Headless (Eksperimental)
-      #   run: |
-      #         /usr/bin/safaridriver > /dev/null 2>&1 &        
+      - name: Check Safari Remote Automation
+        run: |
+          safaridriver --enable
+          safaridriver -p 4444 &
+          sleep 3
+          curl -s http://localhost:4444/status || echo "SafariDriver is not running"
               
-
-
-
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
 
