@@ -95,7 +95,7 @@ public class Homepage {
         int year = targetDate.getYear();
         int day = targetDate.getDayOfMonth();
 
-        waitForElementClickable(By.xpath("//span[@class='glyphicon glyphicon-calendar']"),10).click();
+        waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10).click();
         waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
         waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
         waitForElementClickable(By.xpath("//span[.='"+year+"']"),10).click();
