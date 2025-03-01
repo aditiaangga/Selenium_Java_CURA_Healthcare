@@ -73,7 +73,22 @@ public class Homepage {
     }
 
     public void date(String date){
-        driver.findElement(visitDate).sendKeys(date);
+        // driver.findElement(visitDate).sendKeys(date);
+        // Set tanggal tertentu dalam format dd/MM/yyyy
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate targetDate = LocalDate.parse(date, formatter);
+
+        // Ambil 3 huruf pertama dari nama bulan (contoh: "Feb" untuk February)
+        String month = targetDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH).substring(0, 3);
+        int year = targetDate.getYear();
+        int day = targetDate.getDayOfMonth();
+
+        waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10).click();
+        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
+        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
+        waitForElementClickable(By.xpath("//span[.='"+year+"']"),10).click();
+        waitForElementClickable(By.xpath("//span[.='"+month+"']"),10).click();
+        waitForElementClickable(By.xpath("//td[.='"+day+"']"),10).click();
     }
 
     public void comment(String com){
@@ -97,5 +112,25 @@ public class Homepage {
         String message = visitDate.getAttribute("validationMessage");
         System.out.println("message : " + message);
         ss.takeScreenshotWithResizedHeight("Empty Validation");
+    }
+
+    public WebElement waitForElementClickable(By element, int timeoutInSeconds) {
+        int retries = 0;
+        int maxRetries = 5;  // Maksimum 5 kali percobaan
+
+        while (retries < maxRetries) {
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+                return wait.until(ExpectedConditions.elementToBeClickable(element));
+            } catch (Exception e) {
+                retries++;
+                System.out.println("Percobaan ke-" + retries + ": Elemen belum terlihat, mencoba kembali...");
+
+                if (retries == maxRetries) {
+                    throw new RuntimeException("Gagal menemukan elemen setelah " + maxRetries + " percobaan.", e);
+                }
+            }
+        }
+        return null;
     }
 }
