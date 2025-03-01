@@ -95,11 +95,17 @@ public class Homepage {
         int year = targetDate.getYear();
         int day = targetDate.getDayOfMonth();
 
+        Thread.sleep(1000);
         waitForElementVisible(By.xpath("//span[@class='glyphicon glyphicon-calendar']"),10).click();
+        Thread.sleep(1000);
         waitForElementVisible(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
+        Thread.sleep(1000);
         waitForElementVisible(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
+        Thread.sleep(1000);
         waitForElementVisible(By.xpath("//span[.='"+year+"']"),10).click();
+        Thread.sleep(1000);
         waitForElementVisible(By.xpath("//span[.='"+month+"']"),10).click();
+        Thread.sleep(1000);
         waitForElementVisible(By.xpath("//td[.='"+day+"']"),10).click();
     }
 
