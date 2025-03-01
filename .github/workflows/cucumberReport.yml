@@ -58,7 +58,12 @@ jobs:
         run: |
           safaridriver -p 0 > safaridriver.log 2>&1 &
           sleep 3
-          cat safaridriver.log    
+          cat safaridriver.log  
+
+      - name: Check SafariDriver Status
+        run: |
+          ps aux | grep safaridriver || echo "SafariDriver is not running"
+          curl -s http://localhost:4444/status || echo "SafariDriver is not responding"    
 
               
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
