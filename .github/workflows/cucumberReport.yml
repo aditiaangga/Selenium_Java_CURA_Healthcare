@@ -44,11 +44,10 @@ jobs:
               which safaridriver
               safaridriver --version 
 
-      - name: Start SafariDriver with Logging
+      - name: Force SafariDriver to Run in Background
         run: |
-          safaridriver -p 4444 > safaridriver.log 2>&1 &
+          nohup safaridriver -p 4444 > /dev/null 2>&1 &
           sleep 3
-          cat safaridriver.log
 
               
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
