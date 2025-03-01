@@ -50,7 +50,7 @@ public class Hooks {
 
             case "safari":
                 SafariOptions safariOptions = new SafariOptions();
-                safariOptions.setUseTechnologyPreview(true);
+                // safariOptions.setUseTechnologyPreview(true);
     
                 try {
                     URL safariDriverURL = new URL("http://localhost:4444");
