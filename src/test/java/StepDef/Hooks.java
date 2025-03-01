@@ -12,6 +12,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.DriverManager;
 
 import javax.imageio.ImageIO;
@@ -30,6 +31,14 @@ public class Hooks {
         driver = initializeDriver(browser); // Inisialisasi driver menggunakan method
         DriverManager.setDriver(driver);
         currentScenario = scenario;
+        logBrowserInfo();
+    }
+
+    private void logBrowserInfo() {
+        Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
+        String browserName = caps.getBrowserName();
+        String browserVersion = caps.getBrowserVersion();
+        System.out.println("🚀 Saat ini menggunakan browser: " + browserName + " (versi: " + browserVersion + ")");
     }
 
     private WebDriver initializeDriver(String browser) {
