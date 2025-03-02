@@ -29,19 +29,26 @@ jobs:
 
       - name: Cek versi browser dan WebDriver
         run: |
-             echo "Google Chrome:"
-             "C:\Program Files\Google\Chrome\Application\chrome.exe" --version || echo "Google Chrome tidak ditemukan"
-             echo "ChromeDriver:"
-             "C:\SeleniumWebDrivers\ChromeDriver\chromedriver.exe" --version || echo "ChromeDriver tidak ditemukan"
-             echo "Mozilla Firefox:"
-             "C:\Program Files\Mozilla Firefox\firefox.exe" --version || echo "Mozilla Firefox tidak ditemukan"
-             echo "GeckoDriver:"
-             "C:\SeleniumWebDrivers\GeckoDriver\geckodriver.exe" --version || echo "GeckoDriver tidak ditemukan"
-             echo "Microsoft Edge:"
-             "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --version || echo "Microsoft Edge tidak ditemukan"
-             echo "Edge WebDriver:"
-             "C:\SeleniumWebDrivers\EdgeDriver\msedgedriver.exe" --version || echo "Edge WebDriver tidak ditemukan"
-        shell: powershell
+              $commands = @{
+              "Google Chrome" = "C:\Program Files\Google\Chrome\Application\chrome.exe --version"
+              "ChromeDriver"  = "C:\SeleniumWebDrivers\ChromeDriver\chromedriver.exe --version"
+              "Mozilla Firefox" = "C:\Program Files\Mozilla Firefox\firefox.exe --version"
+              "GeckoDriver"   = "C:\SeleniumWebDrivers\GeckoDriver\geckodriver.exe --version"
+              "Microsoft Edge" = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --version"
+              "Edge WebDriver" = "C:\SeleniumWebDrivers\EdgeDriver\msedgedriver.exe --version"
+              }
+
+              foreach ($name in $commands.Keys) {
+               Write-Output "$name:"
+               $command = $commands[$name]
+               if (Test-Path $command.Split(" ")[0]) {
+                & $command
+               } else {
+                Write-Output "$name tidak ditemukan"
+               }
+              }
+        shell: pwsh
+
       
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
