@@ -27,6 +27,22 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: Cek versi browser dan WebDriver
+        run: |
+             echo "Google Chrome:"
+             "C:\Program Files\Google\Chrome\Application\chrome.exe" --version || echo "Google Chrome tidak ditemukan"
+             echo "ChromeDriver:"
+             "C:\SeleniumWebDrivers\ChromeDriver\chromedriver.exe" --version || echo "ChromeDriver tidak ditemukan"
+             echo "Mozilla Firefox:"
+             "C:\Program Files\Mozilla Firefox\firefox.exe" --version || echo "Mozilla Firefox tidak ditemukan"
+             echo "GeckoDriver:"
+             "C:\SeleniumWebDrivers\GeckoDriver\geckodriver.exe" --version || echo "GeckoDriver tidak ditemukan"
+             echo "Microsoft Edge:"
+             "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --version || echo "Microsoft Edge tidak ditemukan"
+             echo "Edge WebDriver:"
+             "C:\SeleniumWebDrivers\EdgeDriver\msedgedriver.exe" --version || echo "Edge WebDriver tidak ditemukan"
+        #shell: powershell
+      
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
 
