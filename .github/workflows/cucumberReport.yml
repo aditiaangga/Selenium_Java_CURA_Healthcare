@@ -39,7 +39,7 @@ jobs:
               }
 
               foreach ($name in $commands.Keys) {
-               Write-Output "$name:"
+               Write-Output "${name}:"
                $command = $commands[$name]
                if (Test-Path $command.Split(" ")[0]) {
                 & $command
