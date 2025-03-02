@@ -26,28 +26,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-
-      - name: Cek versi browser dan WebDriver
-        run: |
-              $commands = @{
-               "Google Chrome" = "C:\Program Files\Google\Chrome\Application\chrome.exe --version"
-               "ChromeDriver"  = "C:\SeleniumWebDrivers\ChromeDriver\chromedriver.exe --version"
-               "Mozilla Firefox" = "C:\Program Files\Mozilla Firefox\firefox.exe --version"
-               "GeckoDriver"   = "C:\SeleniumWebDrivers\GeckoDriver\geckodriver.exe --version"
-               "Microsoft Edge" = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --version"
-               "Edge WebDriver" = "C:\SeleniumWebDrivers\EdgeDriver\msedgedriver.exe --version"
-              }
-
-              foreach ($name in $commands.Keys) {
-               Write-Output "${name}:"
-               if (Test-Path $executable) {
-                & $executable --version
-               } else {
-                Write-Output "$name tidak ditemukan"
-               }
-              }
-        shell: pwsh
-
       
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
