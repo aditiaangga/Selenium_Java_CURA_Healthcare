@@ -32,13 +32,13 @@ jobs:
               which chromedriver 
               chromedriver --version  
 
-              # echo "Geckodriver:"
-              # which geckodriver
-              # geckodriver --version  
+              echo "Geckodriver:"
+              which geckodriver
+              geckodriver --version  
 
-              # echo "MSEdgeDriver:"
-              # which msedgedriver
-              # msedgedriver --version  
+              echo "MSEdgeDriver:"
+              which msedgedriver
+              msedgedriver --version  
 
               echo "SafariDriver:"
               which safaridriver
