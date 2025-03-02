@@ -36,9 +36,9 @@ jobs:
               # which geckodriver
               # geckodriver --version  
 
-              echo "MSEdgeDriver:"
-              which msedgedriver
-              msedgedriver --version  
+              # echo "MSEdgeDriver:"
+              # which msedgedriver
+              # msedgedriver --version  
 
               echo "SafariDriver:"
               which safaridriver
