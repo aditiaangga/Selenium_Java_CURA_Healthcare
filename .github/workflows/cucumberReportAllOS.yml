@@ -1,0 +1,70 @@
+name: Cucumber Tests (All OS)
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Jalan otomatis setiap hari
+  workflow_dispatch:  # Bisa dijalankan manual tanpa input
+  push:
+    branches:
+      - windows
+      - ubuntu
+      - macos
+
+jobs:
+  test:
+    if: |
+      (github.ref == 'refs/heads/windows' && matrix.os == 'windows-latest') ||
+      (github.ref == 'refs/heads/ubuntu' && matrix.os == 'ubuntu-latest') ||
+      (github.ref == 'refs/heads/macos' && matrix.os == 'macos-latest')
+
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        browser: [chrome, firefox, edge, safari]
+        exclude:
+          - os: windows-latest
+            browser: safari  # Safari tidak ada di Windows
+          - os: ubuntu-latest
+            browser: safari  # Safari tidak ada di Ubuntu
+          - os: macos-latest
+            browser: edge  # Edge tidak ada di macOS
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Check Browser Versions (Ubuntu & macOS)
+        if: matrix.os != 'windows-latest'
+        run: |
+          echo "Chrome:" && google-chrome --version || true
+          echo "Firefox:" && firefox --version || true
+          echo "Edge:" && microsoft-edge --version || true
+          which chromedriver && chromedriver --version || true
+          which geckodriver && geckodriver --version || true
+          which msedgedriver && msedgedriver --version || true
+          which safaridriver && safaridriver --version || true
+
+      - name: Enable Safari Remote Automation
+        if: matrix.os == 'macos-latest' && matrix.browser == 'safari'
+        run: |
+          sudo safaridriver --enable
+          defaults write com.apple.Safari AllowRemoteAutomation -bool true
+          sudo killall safaridriver || true
+
+      - name: Run Cucumber Tests on ${{ matrix.os }} - ${{ matrix.browser }}
+        run: mvn clean verify -Dbrowser=${{ matrix.browser }}
+
+      - name: Upload Cucumber Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-report-${{ matrix.os }}-${{ matrix.browser }}
+          path: target/cucumber-html-reports
