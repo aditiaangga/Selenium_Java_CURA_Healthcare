@@ -1,13 +1,11 @@
 name: Cucumber Tests
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
     inputs:
       browser:
         description: 'Browser'
-        required: false
+        required: true
         default: 'chrome'
         type: choice
         options:
