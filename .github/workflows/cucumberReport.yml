@@ -7,7 +7,7 @@ on:
     inputs:
       browser:
         description: 'Browser'
-        required: true
+        required: false
         default: 'chrome'
         type: choice
         options:
