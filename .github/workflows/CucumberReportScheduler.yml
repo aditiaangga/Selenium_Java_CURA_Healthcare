@@ -2,7 +2,7 @@ name: Cucumber Tests Scheduler
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 17,1,9 * * *'
   push:
     branches:
       - master
