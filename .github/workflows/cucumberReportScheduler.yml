@@ -1,4 +1,4 @@
-name: Cucumber Tests Scheduler Ubuntu
+name: Cucumber Tests Scheduler
 
 on:
   schedule:
