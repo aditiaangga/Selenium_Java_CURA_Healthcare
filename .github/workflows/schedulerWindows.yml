@@ -2,7 +2,7 @@ name: Cucumber Tests Scheduler Windows
 
 on:
   schedule:
-    - cron: '0 17,1,9 * * *'
+    - cron: '45 16,0,8 * * *'
   push:
     branches:
       - windows
