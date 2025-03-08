@@ -2,7 +2,7 @@ name: Cucumber Tests Scheduler MacOS
 
 on:
   schedule:
-    - cron: '0 17,1,9 * * *'
+    - cron: '15 17,1,9 * * *'
   push:
     branches:
       - macos
