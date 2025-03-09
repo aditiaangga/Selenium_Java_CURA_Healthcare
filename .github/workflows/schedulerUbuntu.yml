@@ -15,6 +15,12 @@ jobs:
         browser: [chrome, firefox, edge]
 
     steps:
+      - name: Log Start Time (WIB) on Ubuntu
+        run: |
+            export TZ=Asia/Jakarta
+            FORMATTED_TIME=$(date +"%A, %-d %B %Y - %H:%M:%S WIB")
+            echo "Job started at $FORMATTED_TIME"
+
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
