@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Log Start Time (WIB)
+        run: echo "Job started at $(TZ=Asia/Jakarta date)"
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
