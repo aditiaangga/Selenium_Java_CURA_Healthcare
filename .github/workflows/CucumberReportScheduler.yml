@@ -15,6 +15,14 @@ jobs:
         browser: [chrome, firefox, edge]
 
     steps:
+      - name: Log Start Time (WIB) on Windows
+        shell: pwsh
+        run: |
+            $TimeZone = [System.TimeZoneInfo]::FindSystemTimeZoneById("SE Asia Standard Time")
+            $CurrentTime = [System.TimeZoneInfo]::ConvertTimeFromUtc((Get-Date).ToUniversalTime(), $TimeZone)
+            $FormattedTime = $CurrentTime.ToString("dddd, d MMMM yyyy - HH:mm:ss 'WIB'")
+            echo "Job started at $FormattedTime"
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
