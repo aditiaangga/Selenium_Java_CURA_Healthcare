@@ -17,6 +17,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Log Start Time (WIB) on macOS
+        run: echo "Job started at $(env TZ=Asia/Jakarta date)"
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
