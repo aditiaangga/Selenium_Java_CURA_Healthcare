@@ -18,6 +18,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Log Start Time (WIB) on Windows
+        shell: pwsh
+        run: |
+           $TimeZone = [System.TimeZoneInfo]::FindSystemTimeZoneById("SE Asia Standard Time")       
+           $CurrentTime = [System.TimeZoneInfo]::ConvertTimeFromUtc((Get-Date).ToUniversalTime(), $TimeZone)
+           echo "Job started at $CurrentTime"
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
