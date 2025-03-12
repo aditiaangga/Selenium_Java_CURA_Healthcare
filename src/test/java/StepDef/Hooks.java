@@ -63,7 +63,7 @@ public class Hooks {
                 return new ChromeDriver(chromeOptions);
 
             case "edge":
-                System.setProperty("webdriver.edge.driver", "driver/windows-latest/msedgedriver.exe");
+                System.setProperty("webdriver.edge.driver", "driver/msedgedriver.exe");
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-debugging-port=0");
                 edgeOptions.addArguments("--disable-dev-shm-usage");
