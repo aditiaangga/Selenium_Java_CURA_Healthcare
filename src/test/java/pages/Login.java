@@ -2,9 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utils.SeleniumHelper;
 
 public class Login {
     WebDriver driver;
+    SeleniumHelper sh = new SeleniumHelper(driver);
 
     public Login(WebDriver driver){
         this.driver = driver;
@@ -18,22 +20,27 @@ public class Login {
 
     //Method to click menu Login
     public void clickMenuLogin() {
-        driver.findElement(menu).click();
-        driver.findElement(menuLogin).click();
+        sh.clickWithJS(menu,10);
+        sh.clickWithJS(menuLogin,10);
+        // driver.findElement(menu).click();
+        // driver.findElement(menuLogin).click();
     }
 
     //Method to enter username
     public void enterUsername(String user) {
-        driver.findElement(username).sendKeys(user);
+        sh.waitForElementClickable(username,10).sendKeys(user);
+        // driver.findElement(username).sendKeys(user);
     }
 
     //Method to enter password
     public void enterPassword(String pass) {
-        driver.findElement(password).sendKeys(pass);
+        sh.waitForElementClickable(password,10).sendKeys(pass);
+        // driver.findElement(password).sendKeys(pass);
     }
 
     //Method to click on Login button
     public void clickLogin() {
-        driver.findElement(buttonLogin).click();
+        sh.clickWithJS(buttonLogin,10);
+        // driver.findElement(buttonLogin).click();
     }
 }
