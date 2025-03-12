@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ScreenshotUtil;
+import utils.SeleniumHelper;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.Locale;
 public class Homepage {
     WebDriver driver;
     ScreenshotUtil ss = new ScreenshotUtil(driver);
+    SeleniumHelper sh = new SeleniumHelper(driver);
 
 
     public Homepage(WebDriver driver){
@@ -31,41 +33,45 @@ public class Homepage {
     By comment = By.id("txt_comment");
     By buttonBookAppointment = By.id("btn-book-appointment");
 
-    public void verifyHomepage(){
-        String homepage = driver.findElement(makeAppointment).getText();
+    public void verifyHomepage() throws InterruptedException {
+        Thread.sleep(5000);
+        waitForPageLoad();
+        String homepage = waitForElementVisible(makeAppointment,10).getText();
         System.out.println(homepage);
         Assertions.assertEquals("Make Appointment", homepage);
         ss.takeScreenshotWithResizedHeight("homepage");
     }
 
-    public void clickMakeAppointment() throws InterruptedException {
-        Thread.sleep(1000);
+    public void clickMakeAppointment() {
+        waitForPageLoad();
+        waitForElementVisible(makeAppointment, 10);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
-        Thread.sleep(1000);
+        WebElement btnMakeAppointment = waitForElementVisible(buttonMakeAppointment,15);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        driver.findElement(buttonMakeAppointment).click();
+        btnMakeAppointment.click();
     }
 
     public void goToMakeAppointment() throws InterruptedException {
+        waitForPageLoad();
+        waitForElementVisible(makeAppointment,10);
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        Thread.sleep(1000);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
-        Thread.sleep(1000);
+        waitForElementVisible(buttonMakeAppointment,10);
         js.executeScript("window.scrollBy(0,500)");
         ss.takeScreenshotWithResizedHeight("Make Appointment");
     }
 
     public void facility(String city){
-        Select drpFacility = new Select(driver.findElement(By.id("combo_facility")));
+        Select drpFacility = new Select(waitForElementVisible(By.id("combo_facility"),10));
         drpFacility.selectByValue(city+" CURA Healthcare Center");
     }
 
     public void hospitalReadmission(){
-        WebElement checkbox = driver.findElement(hospitalReadmission);
+        WebElement checkbox = waitForElementVisible(hospitalReadmission,10);
         boolean isSelected = checkbox.isSelected();
         if(isSelected == false) {
             checkbox.click();
@@ -73,15 +79,16 @@ public class Homepage {
     }
 
     public void healthcareProgram(String hc){
-        WebElement radiobtn = driver.findElement(By.xpath("//input[@value='"+hc+"']"));
+        WebElement radiobtn = waitForElementVisible(By.xpath("//input[@value='"+hc+"']"),15);
         boolean Selected = radiobtn.isSelected();
         if(Selected == false) {
             radiobtn.click();
         }
     }
 
-    public void date(String date){
-        // driver.findElement(visitDate).sendKeys(date);
+    public void date(String date) throws InterruptedException {
+        // waitForElementVisible(visitDate,10).sendKeys(date);
+        
         // Set tanggal tertentu dalam format dd/MM/yyyy
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate targetDate = LocalDate.parse(date, formatter);
@@ -91,25 +98,34 @@ public class Homepage {
         int year = targetDate.getYear();
         int day = targetDate.getDayOfMonth();
 
-        waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10).click();
-        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
-        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
-        waitForElementClickable(By.xpath("//span[.='"+year+"']"),10).click();
-        waitForElementClickable(By.xpath("//span[.='"+month+"']"),10).click();
-        waitForElementClickable(By.xpath("//td[.='"+day+"']"),10).click();
+        // waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10).click();
+        // waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
+        // waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
+        // waitForElementClickable(By.xpath("//span[.='"+year+"']"),10).click();
+        // waitForElementClickable(By.xpath("//span[.='"+month+"']"),10).click();
+        // waitForElementClickable(By.xpath("//td[.='"+day+"']"),10).click();
+
+        sh.clickWithJS(By.xpath("//label[@for='txt_visit_date']"),10);
+        sh.clickWithJS(By.xpath("(//th[@class='datepicker-switch'])[1]"),10);
+        sh.clickWithJS(By.xpath("(//th[@class='datepicker-switch'])[2]"),10);
+        sh.clickWithJS(By.xpath("//span[.='"+year+"']"),10);
+        sh.clickWithJS(By.xpath("//span[.='"+month+"']"),10);
+        sh.clickWithJS(By.xpath("//td[.='"+day+"']"),10);
+
     }
 
     public void comment(String com){
-        driver.findElement(comment).sendKeys(com);
+        waitForElementVisible(comment,10).sendKeys(com);
     }
 
     public void submitBookAppointment(){
-        driver.findElement(buttonBookAppointment).click();
+        // waitForElementVisible(buttonBookAppointment,10).click();
+        sh.clickWithJS(buttonBookAppointment,10);
     }
 
     public void emptyValidation(){
-        WebElement visitDate = driver.findElement(By.name("visit_date"));
-        Boolean isRequiredVisitDate = Boolean.valueOf(driver.findElement(By.name("visit_date")).getAttribute("required"));
+        WebElement visitDate = waitForElementVisible(By.name("visit_date"),10);
+        Boolean isRequiredVisitDate = Boolean.valueOf(waitForElementVisible(By.name("visit_date"),10).getAttribute("required"));
         //visitDate.getAttribute("required");
         System.out.println(isRequiredVisitDate);
         visitDate.isDisplayed();
@@ -120,6 +136,26 @@ public class Homepage {
         String message = visitDate.getAttribute("validationMessage");
         System.out.println("message : " + message);
         ss.takeScreenshotWithResizedHeight("Empty Validation");
+    }
+
+    public WebElement waitForElementVisible(By element, int timeoutInSeconds) {
+        int retries = 0;
+        int maxRetries = 5;  // Maksimum 5 kali percobaan
+
+        while (retries < maxRetries) {
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+            } catch (Exception e) {
+                retries++;
+                System.out.println("Percobaan ke-" + retries + ": Elemen belum terlihat, mencoba kembali...");
+
+                if (retries == maxRetries) {
+                    throw new RuntimeException("Gagal menemukan elemen setelah " + maxRetries + " percobaan.", e);
+                }
+            }
+        }
+        return null;
     }
 
     public WebElement waitForElementClickable(By element, int timeoutInSeconds) {
@@ -140,5 +176,10 @@ public class Homepage {
             }
         }
         return null;
+    }
+
+    public void waitForPageLoad() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 }
