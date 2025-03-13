@@ -7,7 +7,7 @@ import pages.Homepage;
 import pages.Login;
 
 public class tc5_FailedAppointment {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         WebDriverManager.edgedriver().setup();
         EdgeDriver driver = new EdgeDriver();
 
