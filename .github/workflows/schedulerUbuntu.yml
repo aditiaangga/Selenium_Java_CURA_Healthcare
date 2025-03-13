@@ -35,17 +35,22 @@ jobs:
       - name: Check Browser versions
         run: |
               echo "Chrome:"
-              google-chrome --version
+              which google-chrome && google-chrome --version
+
               echo "Firefox:"
-              firefox --version
+              which firefox && firefox --version
+
               echo "Edge:"
-              microsoft-edge --version
-              which chromedriver
-              chromedriver --version
-              which geckodriver
-              geckodriver --version
-              which msedgedriver
-              msedgedriver --version
+              which microsoft-edge && microsoft-edge --version
+
+              echo "ChromeDriver:"
+              which chromedriver && chromedriver --version
+
+              echo "GeckoDriver:"
+              which geckodriver && geckodriver --version
+
+              echo "EdgeDriver:"
+              which msedgedriver && msedgedriver --version
 
       - name: Run Cucumber Tests on ${{ matrix.browser }}
         run: mvn clean verify -Dbrowser=${{ matrix.browser }}
