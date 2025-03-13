@@ -54,7 +54,7 @@ public class Hooks {
     private WebDriver initializeDriver(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "C:/SeleniumWebDrivers/ChromeDriver/chromedriver.exe");
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
@@ -63,7 +63,7 @@ public class Hooks {
                 return new ChromeDriver(chromeOptions);
 
             case "edge":
-                System.setProperty("webdriver.edge.driver", "driver/msedgedriver.exe");
+                System.setProperty("webdriver.edge.driver", "C:/SeleniumWebDrivers/EdgeDriver/msedgedriver.exe");
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-debugging-port=0");
                 edgeOptions.addArguments("--disable-dev-shm-usage");
@@ -72,7 +72,7 @@ public class Hooks {
                 return new EdgeDriver(edgeOptions);
 
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", "C:/SeleniumWebDrivers/GeckoDriver/geckodriver.exe");
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
 //                firefoxOptions.setCapability("webSocketUrl", true);
 //                firefoxOptions.setCapability("moz:debuggerAddress", true);
