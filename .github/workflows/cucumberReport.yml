@@ -37,21 +37,24 @@ jobs:
 
       - name: Check Browser versions
         run: |
-              echo "Chromedriver:"
-              where chromedriver 
-              chromedriver --version  
-
-              echo "Geckodriver:"
-              where geckodriver
-              geckodriver --version  
-
-              echo "MSEdgeDriver:"
-              where msedgedriver
-              msedgedriver --version  
-
-              echo "SafariDriver:"
-              where safaridriver
-              safaridriver --version 
+              Write-Output "Chrome:"
+              if (Get-Command chrome -ErrorAction SilentlyContinue) { chrome --version } else { Write-Output "Chrome tidak ditemukan" }
+              
+              Write-Output "Firefox:"
+              if (Get-Command firefox -ErrorAction SilentlyContinue) { firefox --version } else { Write-Output "Firefox tidak ditemukan" }
+              
+              Write-Output "Edge:"
+              if (Get-Command msedge -ErrorAction SilentlyContinue) { msedge --version } else { Write-Output "Edge tidak ditemukan" }
+              
+              Write-Output "ChromeDriver:"
+              if (Get-Command chromedriver -ErrorAction SilentlyContinue) { chromedriver --version } else { Write-Output "ChromeDriver tidak ditemukan" }
+              
+              Write-Output "GeckoDriver:"
+              if (Get-Command geckodriver -ErrorAction SilentlyContinue) { geckodriver --version } else { Write-Output "GeckoDriver tidak ditemukan" }
+              
+              Write-Output "EdgeDriver:"
+              if (Get-Command msedgedriver -ErrorAction SilentlyContinue) { msedgedriver --version } else { Write-Output "EdgeDriver tidak ditemukan" }
+ 
 
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
