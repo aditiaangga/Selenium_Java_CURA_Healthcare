@@ -34,9 +34,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-      
-      - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
-        run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
 
       - name: Check Browser versions
         run: |
@@ -55,6 +52,9 @@ jobs:
               echo "SafariDriver:"
               where safaridriver
               safaridriver --version 
+
+      - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
+        run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
 
       - name: Upload Cucumber Reports
         if: always()
