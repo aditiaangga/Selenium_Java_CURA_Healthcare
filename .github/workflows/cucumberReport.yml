@@ -37,18 +37,6 @@ jobs:
 
       - name: Check Browser versions
         run: |
-              Write-Output "Chrome:"
-              $chrome = Get-Command chrome -ErrorAction SilentlyContinue
-              if ($chrome) { Write-Output "Path: $($chrome.Source)"; chrome --version } else { Write-Output "Chrome tidak ditemukan" }
-              
-              Write-Output "Firefox:"
-              $firefox = Get-Command firefox -ErrorAction SilentlyContinue
-              if ($firefox) { Write-Output "Path: $($firefox.Source)"; firefox --version } else { Write-Output "Firefox tidak ditemukan" }
-              
-              Write-Output "Edge:"
-              $edge = Get-Command msedge -ErrorAction SilentlyContinue
-              if ($edge) { Write-Output "Path: $($edge.Source)"; msedge --version } else { Write-Output "Edge tidak ditemukan" }
-              
               Write-Output "ChromeDriver:"
               $chromedriver = Get-Command chromedriver -ErrorAction SilentlyContinue
               if ($chromedriver) { Write-Output "Path: $($chromedriver.Source)"; chromedriver --version } else { Write-Output "ChromeDriver tidak ditemukan" }
@@ -61,7 +49,6 @@ jobs:
               $edgedriver = Get-Command msedgedriver -ErrorAction SilentlyContinue
               if ($edgedriver) { Write-Output "Path: $($edgedriver.Source)"; msedgedriver --version } else { Write-Output "EdgeDriver tidak ditemukan" }
               
-
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
 
