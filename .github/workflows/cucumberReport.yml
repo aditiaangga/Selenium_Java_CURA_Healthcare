@@ -38,6 +38,24 @@ jobs:
       - name: Run Cucumber Tests ${{ github.event.inputs.browser }}
         run: mvn clean verify -Dbrowser=${{ github.event.inputs.browser }}
 
+      - name: Check Browser versions
+        run: |
+              echo "Chromedriver:"
+              where chromedriver 
+              chromedriver --version  
+
+              echo "Geckodriver:"
+              where geckodriver
+              geckodriver --version  
+
+              echo "MSEdgeDriver:"
+              where msedgedriver
+              msedgedriver --version  
+
+              echo "SafariDriver:"
+              where safaridriver
+              safaridriver --version 
+
       - name: Upload Cucumber Reports
         if: always()
         uses: actions/upload-artifact@v4
