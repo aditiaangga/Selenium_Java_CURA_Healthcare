@@ -35,28 +35,60 @@ jobs:
       - name: Check Browser versions
         run: |
               echo "Chrome:"
-              which google-chrome && google-chrome --version
-
+              if [ -e "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
+                "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --version
+              else
+                echo "Google Chrome tidak ditemukan"
+              fi
+              
               echo "Firefox:"
-              which firefox && firefox --version
-
+              which firefox && firefox --version || echo "Firefox tidak ditemukan"
+              
               echo "Edge:"
-              which microsoft-edge && microsoft-edge --version
+              if [ -e "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" ]; then
+                "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" --version
+              else
+                echo "Microsoft Edge tidak ditemukan"
+              fi
 
               echo "Safari:"
-              which safari && safari --version
+              which safari && safari --version 2>/dev/null || echo "Safari tidak mendukung perintah --version"
+
+              echo "SafariDriver:"
+              which safaridriver && safaridriver --version || echo "SafariDriver tidak ditemukan"
 
               echo "ChromeDriver:"
-              which chromedriver && chromedriver --version
+              which chromedriver && chromedriver --version || echo "ChromeDriver tidak ditemukan"
 
               echo "GeckoDriver:"
-              which geckodriver && geckodriver --version
+              which geckodriver && geckodriver --version || echo "GeckoDriver tidak ditemukan"
 
               echo "EdgeDriver:"
-              which msedgedriver && msedgedriver --version  
+              which msedgedriver && msedgedriver --version || echo "EdgeDriver tidak ditemukan"
+
+              # echo "Chrome:"
+              # which google-chrome && google-chrome --version
+
+              # echo "Firefox:"
+              # which firefox && firefox --version
+
+              # echo "Edge:"
+              # which microsoft-edge && microsoft-edge --version
+
+              # echo "Safari:"
+              # which safari && safari --version
+
+              # echo "ChromeDriver:"
+              # which chromedriver && chromedriver --version
+
+              # echo "GeckoDriver:"
+              # which geckodriver && geckodriver --version
+
+              # echo "EdgeDriver:"
+              # which msedgedriver && msedgedriver --version  
               
-              echo "SafariDriver:"
-              which safaridriver && safaridriver --version 
+              # echo "SafariDriver:"
+              # which safaridriver && safaridriver --version 
 
       - name: Enable Safari Remote Automation
         if: runner.os == 'macOS' && github.event.inputs.browser == 'safari'
