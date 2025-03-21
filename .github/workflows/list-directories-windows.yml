@@ -33,7 +33,9 @@ jobs:
             dir C:\
             echo "Listing Program Files:"
             dir 'C:\Program Files'
-            echo "Listing Android SDK:"
-            dir 'C:\Users\runneradmin\AppData\Local\Android\Sdk'
+            echo "Listing Android:"
+            dir 'C:\Android'
+            echo "Listing SeleniumWebDrivers:"
+            dir 'C:\SeleniumWebDrivers'
         shell: pwsh
 
