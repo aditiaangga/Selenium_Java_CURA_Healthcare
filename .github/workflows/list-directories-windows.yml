@@ -22,3 +22,8 @@ jobs:
       - name: Show home directory
         run: Get-ChildItem -Path $env:USERPROFILE -Recurse
         shell: pwsh
+
+      - name: List all files and folders in C:\
+        run: Get-ChildItem -Path C:\ -Force
+        shell: pwsh
+
