@@ -27,3 +27,13 @@ jobs:
         run: Get-ChildItem -Path C:\ -Force
         shell: pwsh
 
+      - name: Explore Directories Step by Step
+        run: |
+            echo "Listing Root Directory:"
+            dir C:\
+            echo "Listing Program Files:"
+            dir 'C:\Program Files'
+            echo "Listing Android SDK:"
+            dir 'C:\Users\runneradmin\AppData\Local\Android\Sdk'
+        shell: pwsh
+
