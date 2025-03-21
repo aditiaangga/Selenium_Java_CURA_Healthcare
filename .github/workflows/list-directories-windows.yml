@@ -37,5 +37,9 @@ jobs:
             dir 'C:\Android'
             echo "Listing SeleniumWebDrivers:"
             dir 'C:\SeleniumWebDrivers'
+            dir 'C:\SeleniumWebDrivers\ChromeDriver'
+            dir 'C:\SeleniumWebDrivers\EdgeDriver'
+            dir 'C:\SeleniumWebDrivers\GeckoDriver'
+            dir 'C:\SeleniumWebDrivers\IEDriver'
         shell: pwsh
 
