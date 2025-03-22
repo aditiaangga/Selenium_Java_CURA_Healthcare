@@ -12,6 +12,7 @@ on:
           - chrome
           - firefox
           - edge
+          - ie
 
 jobs:
   test:
