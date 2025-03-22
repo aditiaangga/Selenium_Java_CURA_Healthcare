@@ -13,6 +13,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.DriverManager;
 
@@ -59,8 +61,15 @@ public class Hooks {
                 chromeOptions.addArguments("--remote-debugging-port=0"); // Hindari konflik port
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
-//                operaOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
+//                chromeOptions.addArguments("--headless=new");           // Jalankan di mode headless (opsional)
                 return new ChromeDriver(chromeOptions);
+            
+            case "ie":
+                System.setProperty("webdriver.ie.driver", "C:/SeleniumWebDrivers/IEDriver/IEDriverServer.exe");
+                InternetExplorerOptions ieOpt = new InternetExplorerOptions();
+                ieOpt.attachToEdgeChrome();
+                ieOpt.introduceFlakinessByIgnoringSecurityDomains();
+                return new InternetExplorerDriver(ieOpt);
 
             case "edge":
                 System.setProperty("webdriver.edge.driver", "C:/SeleniumWebDrivers/EdgeDriver/msedgedriver.exe");
