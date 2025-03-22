@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        browser: [chrome, firefox, edge]
+        browser: [chrome, firefox, edge, ie]
 
     steps:
       - name: Log Start Time (WIB) on Windows
