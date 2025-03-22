@@ -19,3 +19,27 @@ jobs:
         run: |
           brew install tree
           tree -L 2 /
+    
+      - name: List All Files in /usr/bin
+        run: ls -lah /usr/bin
+
+      - name: Count Total Files in /usr/bin
+        run: ls /usr/bin | wc -l
+
+      - name: List All Files in /usr/local/bin
+        run: ls -lah /usr/local/bin
+
+      - name: Count Total Files in /usr/local/bin
+        run: ls /usr/local/bin | wc -l
+
+      - name: Find Specific Binaries
+        run: |
+          which java || echo "Java not found"
+          which python || echo "Python not found"
+          which mvn || echo "Maven not found"
+
+      - name: Show First 20 Files in /usr/bin
+        run: ls /usr/bin | head -n 20
+
+      - name: Show First 20 Files in /usr/local/bin
+        run: ls /usr/local/bin | head -n 20
