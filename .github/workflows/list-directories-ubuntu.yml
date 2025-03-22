@@ -3,27 +3,20 @@ name: List Directories (Ubuntu)
 on: [workflow_dispatch]  # Bisa dijalankan manual
 
 jobs:
-  list-directories:
+  list-root-directories:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Print Current User and Home
+        run: |
+          whoami
+          echo "Home Directory: $HOME"
 
-      - name: Print Current Directory
-        run: pwd
+      - name: List Root Directories
+        run: ls -lah /
 
-      - name: List All Files and Directories
-        run: ls -lah
-
-      - name: List Only Directories
-        run: ls -d */
-
-      - name: Find All Directories Recursively
-        run: find . -type d
-
-      - name: Install and Show Directory Tree
+      - name: Show Full Directory Tree from Root (Limited Depth)
         run: |
           sudo apt-get update
           sudo apt-get install -y tree
-          tree -L 2
+          tree -L 2 /
