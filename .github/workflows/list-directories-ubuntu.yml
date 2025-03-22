@@ -21,7 +21,7 @@ jobs:
       - name: Count Total Files in /usr/bin
         run: ls /usr/bin | wc -l
 
-      - name: Find Specific Binaries (Example: java, python, mvn)
+      - name: Find Specific Binaries
         run: |
           which java || echo "Java not found"
           which python || echo "Python not found"
