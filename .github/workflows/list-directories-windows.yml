@@ -34,7 +34,7 @@ jobs:
             echo "Listing Program Files:"
             dir 'C:\Program Files'
             echo "Listing Android:"
-            dir 'C:\Android'
+            dir 'C:\Program Files\Android'
             echo "Listing SeleniumWebDrivers:"
             dir 'C:\SeleniumWebDrivers'
             dir 'C:\SeleniumWebDrivers\ChromeDriver'
