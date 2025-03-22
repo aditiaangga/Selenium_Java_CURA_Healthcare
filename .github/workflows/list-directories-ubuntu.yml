@@ -15,8 +15,17 @@ jobs:
       - name: List Root Directories
         run: ls -lah /
 
-      - name: Show Full Directory Tree from Root (Limited Depth)
+      - name: List All Files in /usr/bin
+        run: ls -lah /usr/bin
+
+      - name: Count Total Files in /usr/bin
+        run: ls /usr/bin | wc -l
+
+      - name: Find Specific Binaries (Example: java, python, mvn)
         run: |
-          sudo apt-get update
-          sudo apt-get install -y tree
-          tree -L 2 /
+          which java || echo "Java not found"
+          which python || echo "Python not found"
+          which mvn || echo "Maven not found"
+
+      - name: Show First 20 Files in /usr/bin
+        run: ls /usr/bin | head -n 20
