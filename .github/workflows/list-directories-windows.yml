@@ -43,3 +43,6 @@ jobs:
             dir 'C:\SeleniumWebDrivers\IEDriver'
         shell: pwsh
 
+      - name: List all files and folders in D:\
+        run: Get-ChildItem -Path D:\ -Force
+        shell: pwsh
