@@ -27,7 +27,7 @@ jobs:
         run: Get-ChildItem -Path C:\ -Force
         shell: pwsh
 
-      - name: Explore Directories Step by Step
+      - name: Explore Directories Step by Step C:\
         run: |
             echo "Listing Root Directory:"
             dir C:\
@@ -45,4 +45,12 @@ jobs:
 
       - name: List all files and folders in D:\
         run: Get-ChildItem -Path D:\ -Force
+        shell: pwsh
+
+      - name: Explore Directories Step by Step D:\
+        run: |
+            echo "Listing Root Directory:"
+            dir D:\
+            echo "Listing Program Files:"
+            dir 'D:\a'
         shell: pwsh
