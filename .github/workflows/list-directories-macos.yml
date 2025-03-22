@@ -1,0 +1,21 @@
+name: List Root Directories on macOS
+
+on: [workflow_dispatch]  # Bisa dijalankan manual
+
+jobs:
+  list-root-macos:
+    runs-on: macos-latest
+
+    steps:
+      - name: Print Current User and Home
+        run: |
+          whoami
+          echo "Home Directory: $HOME"
+
+      - name: List Root Directories
+        run: ls -lah /
+
+      - name: Show Full Directory Tree from Root (Limited Depth)
+        run: |
+          brew install tree
+          tree -L 2 /
