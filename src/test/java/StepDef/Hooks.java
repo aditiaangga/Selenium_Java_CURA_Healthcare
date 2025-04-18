@@ -62,6 +62,10 @@ public class Hooks {
                 chromeOptions.addArguments("--disable-dev-shm-usage");  // Kurangi penggunaan shared memory
                 chromeOptions.addArguments("--no-sandbox");             // Hindari sandbox (untuk debugging)
                 chromeOptions.addArguments("--headless=chrome");           // Jalankan di mode headless (opsional)
+                chromeoptions.setExperimentalOption("prefs", new HashMap<String, Object>() {{
+                    put("credentials_enable_service", false);
+                    put("profile.password_manager_enabled", false);
+                }});
                 return new ChromeDriver(chromeOptions);
             
             case "ie":
