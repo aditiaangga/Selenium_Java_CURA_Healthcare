@@ -64,12 +64,12 @@ public class Homepage {
     }
 
     public void facility(String city){
-        Select drpFacility = new Select(waitForElementVisible(By.id("combo_facility"),10));
+        Select drpFacility = new Select(waitForElementVisible(By.id("combo_facility"),15));
         drpFacility.selectByValue(city+" CURA Healthcare Center");
     }
 
     public void hospitalReadmission(){
-        WebElement checkbox = waitForElementVisible(hospitalReadmission,10);
+        WebElement checkbox = waitForElementVisible(hospitalReadmission,15);
         boolean isSelected = checkbox.isSelected();
         if(isSelected == false) {
             checkbox.click();
@@ -95,12 +95,12 @@ public class Homepage {
         int year = targetDate.getYear();
         int day = targetDate.getDayOfMonth();
 
-        waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),10).click();
-        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),10).click();
-        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),10).click();
-        waitForElementClickable(By.xpath("//span[.='"+year+"']"),10).click();
-        waitForElementClickable(By.xpath("//span[.='"+month+"']"),10).click();
-        waitForElementClickable(By.xpath("//td[.='"+day+"']"),10).click();
+        waitForElementClickable(By.xpath("//label[@for='txt_visit_date']"),15).click();
+        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[1]"),15).click();
+        waitForElementClickable(By.xpath("(//th[@class='datepicker-switch'])[2]"),15).click();
+        waitForElementClickable(By.xpath("//span[.='"+year+"']"),15).click();
+        waitForElementClickable(By.xpath("//span[.='"+month+"']"),15).click();
+        waitForElementClickable(By.xpath("//td[.='"+day+"']"),15).click();
     }
 
     public void comment(String com){
