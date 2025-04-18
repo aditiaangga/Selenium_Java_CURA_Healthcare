@@ -67,6 +67,7 @@ public class Hooks {
                 chromeOptions.setExperimentalOption("prefs", new HashMap<String, Object>() {{
                     put("credentials_enable_service", false);
                     put("profile.password_manager_enabled", false);
+                    put("profile.password_manager_leak_detection", false);
                 }});
                 return new ChromeDriver(chromeOptions);
             
